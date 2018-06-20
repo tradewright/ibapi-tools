@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ContractInspector")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("ContractInspector for Interactive Brokers API")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("ContractInspector")]
-[assembly: AssemblyCopyright("Copyright © Richard L King  2018")]
+[assembly: AssemblyCopyright("Copyright © Richard L King 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
