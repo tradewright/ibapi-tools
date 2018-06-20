@@ -14,7 +14,9 @@ Using this tool you can:
    API call. The market depth data is displayed in real-time in separate grids
    for bids and asks.
 
-To install, simply download the relevant .zip file from the [Releases](../Releases)
-section and extract the files to a folder of your choice. 
+To install, simply download the relevant .zip file from the [Releases](Releases)
+section and extract the files to a folder of your choice. Alternatively clone the
+repository to your computer and build it using Visual Studio 15 or Visual Studio 17
+from the ContractInspector.sln solution file in the ContractInspector folder.
 
 To run, start the ContractInspector.exe file.
