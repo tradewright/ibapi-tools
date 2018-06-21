@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CSharpAPI">
-      <HintPath>..\..\tws-api-9.73.07\source\csharpclient\client\bin\Debug\CSharpAPI.dll</HintPath>
+      <HintPath>dependencies\CSharpAPI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

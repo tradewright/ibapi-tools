@@ -37,8 +37,8 @@ namespace ContractInspector
         public int Compare(ContractDetails details1, ContractDetails details2) {
             int result = 0;
             for (int i = 0; i < SortKeys.Length; i++) {
-                Contract contract1 = details1.Contract;
-                Contract contract2 = details2.Contract;
+                Contract contract1 = details1.Summary;
+                Contract contract2 = details2.Summary;
 
                 switch (SortKeys[i]) {
                 case ContractSortKeyId.None:
