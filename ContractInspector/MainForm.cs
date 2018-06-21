@@ -164,9 +164,13 @@ namespace ContractInspector
             e.Cancel = !validate(ClientIdTextBox, validateClientId);
         }
 
-        private void ConnectButton_Click(object sender, EventArgs e)
+        private void ConnectDisconnectButton_Click(object sender, EventArgs e)
         {
-            connectToTWS();
+            if (mConnectionState == ConnectionState.Disconnected) {
+                connectToTWS();
+            } else {
+                disconnectFromTWS();
+            }
         }
 
         private void ConIdText_Validating(object sender, CancelEventArgs e) {
@@ -176,21 +180,6 @@ namespace ContractInspector
         private void ContractGrid_SelectionChanged(object sender, EventArgs e) {
             StartTickersButton.Enabled = (ContractGrid.SelectedRows.Count > 0);
             StartMarketDepthButton.Enabled = (ContractGrid.SelectedRows.Count == 1);
-        }
-
-        private void DisconnectButton_Click(object sender, EventArgs e)
-        {
-            ConnectButton.Enabled = true;
-            DisconnectButton.Enabled = false;
-            ReqContractDetailsButton.Enabled = false;
-
-            ContractGrid.Rows.Clear();
-            mDepthMgr.Clear();
-            stopAllTickers();
-            disconnectFromTWS();
-
-            mNextTickerId = 0;
-            mTickers.Clear();
         }
 
         private void PortTextBox_Validating(object sender, CancelEventArgs e) {
@@ -487,6 +476,15 @@ namespace ContractInspector
             logMessage("Disconnecting from TWS");
             setConnectionState(ConnectionState.Disconnected);
             mApi.eDisconnect();
+
+            ReqContractDetailsButton.Enabled = false;
+
+            ContractGrid.Rows.Clear();
+            mDepthMgr.Clear();
+            stopAllTickers();
+
+            mNextTickerId = 0;
+            mTickers.Clear();
         }
 
         private void ensureTickerGridRowExists(int tickerId)
@@ -512,23 +510,22 @@ namespace ContractInspector
                 ConnectionPanel.BackColor = Color.MistyRose;
                 ConnectionStatusLabel.Text = "Not connected";
                 ConnectionStatusLabel.ForeColor = Color.Red;
-                ConnectButton.Enabled = true;
-                DisconnectButton.Enabled = false;
+                ConnectDisconnectButton.Enabled = true;
+                ConnectDisconnectButton.Text = "Connect";
                 ServerTextBox.Focus();
                 break;
             case ConnectionState.Connecting:
                 ConnectionPanel.BackColor = Color.FromArgb(251, 227, 80);
                 ConnectionStatusLabel.Text = "Connecting...";
                 ConnectionStatusLabel.ForeColor = Color.FromArgb(255, 178, 82);
-                ConnectButton.Enabled = false;
-                DisconnectButton.Enabled = false;
+                ConnectDisconnectButton.Enabled = false;
                 break;
             case ConnectionState.Connected:
                 ConnectionPanel.BackColor = Color.FromArgb(179, 230, 179);
                 ConnectionStatusLabel.Text = "Connected";
                 ConnectionStatusLabel.ForeColor = Color.FromArgb(19, 146, 18);
-                ConnectButton.Enabled = false;
-                DisconnectButton.Enabled = true;
+                ConnectDisconnectButton.Enabled = true;
+                ConnectDisconnectButton.Text = "Disconnect";
                 break;
             }
         }
