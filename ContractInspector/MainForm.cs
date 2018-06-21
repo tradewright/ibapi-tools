@@ -214,7 +214,7 @@ namespace ContractInspector
                 for (int i = 0; i < contractDetailsList.Count; i++) {
                     var row = ContractGrid.Rows[i];
                     row.Tag = contractDetailsList[i];
-                    var c = contractDetailsList[i].Summary;
+                    var c = contractDetailsList[i].Contract;
 
                     showContractValue(row, ContractColumnId, c.ConId.ToString());
                     showContractValue(row, ContractColumnCurrency, c.Currency);
@@ -242,7 +242,7 @@ namespace ContractInspector
             if (mDepthMgr.InProgress)
                 stopMarketDepth();
             var contractDetails = (ContractDetails)ContractGrid.SelectedRows[0].Tag;
-            mDepthMgr.Initialise(20, contractDetails.Summary.SecType,contractDetails.MinTick * contractDetails.PriceMagnifier);
+            mDepthMgr.Initialise(20, contractDetails.Contract.SecType,contractDetails.MinTick * contractDetails.PriceMagnifier);
             startMarketDepth(contractDetails);
             StopMarketDepthButton.Enabled = true;
             TabControl1.SelectedTab = MarketDepthTabPage;
@@ -380,13 +380,13 @@ namespace ContractInspector
             switch (tickType)
             {
             case IBApi.TickType.ASK:
-                showTickerValue(tickerId, TickerColumnAsk, PriceFormatter.FormatPrice(price, cd.Summary.SecType, cd.MinTick * cd.PriceMagnifier));
+                showTickerValue(tickerId, TickerColumnAsk, PriceFormatter.FormatPrice(price, cd.Contract.SecType, cd.MinTick * cd.PriceMagnifier));
                 break;
             case IBApi.TickType.BID:
-                showTickerValue(tickerId, TickerColumnBid, PriceFormatter.FormatPrice(price, cd.Summary.SecType, cd.MinTick * cd.PriceMagnifier));
+                showTickerValue(tickerId, TickerColumnBid, PriceFormatter.FormatPrice(price, cd.Contract.SecType, cd.MinTick * cd.PriceMagnifier));
                 break;
             case IBApi.TickType.LAST:
-                showTickerValue(tickerId, TickerColumnLast, PriceFormatter.FormatPrice(price, cd.Summary.SecType, cd.MinTick * cd.PriceMagnifier));
+                showTickerValue(tickerId, TickerColumnLast, PriceFormatter.FormatPrice(price, cd.Contract.SecType, cd.MinTick * cd.PriceMagnifier));
                 break;
             }
         }
@@ -470,7 +470,7 @@ namespace ContractInspector
             var row = TickerGrid.Rows[TickerGrid.Rows.Add()];
             row.Tag = (object)tickerId;
             mTickers[tickerId].GridRow = row;
-            showTickerValue(tickerId, TickerColumnSymbol, mTickers[tickerId].ContractDetails.Summary.LocalSymbol);
+            showTickerValue(tickerId, TickerColumnSymbol, mTickers[tickerId].ContractDetails.Contract.LocalSymbol);
         }
 
         private void logMessage(string pMsg)
@@ -524,19 +524,19 @@ namespace ContractInspector
 
         private void startMarketDepth(ContractDetails contractDetails)
         {
-            logMessage($"Starting market depth: {contractToString(contractDetails.Summary)}");
+            logMessage($"Starting market depth: {contractToString(contractDetails.Contract)}");
             var id = mNextDOMTickerId++;
-            mApi.reqMarketDepth(id, contractDetails.Summary, 20, null);
+            mApi.reqMarketDepth(id, contractDetails.Contract, 20, null);
             Ticker ticker = new Ticker(contractDetails);
             mDOMTickers.Add(ticker);
         }
 
         private void startTicker(ContractDetails contractDetails)
         {
-            logMessage($"Starting ticker: {contractToString(contractDetails.Summary)}");
+            logMessage($"Starting ticker: {contractToString(contractDetails.Contract)}");
 
             var id = mNextTickerId++;
-            mApi.reqMktData(id, contractDetails.Summary, "", false, false, null);
+            mApi.reqMktData(id, contractDetails.Contract, "", false, false, null);
             Ticker ticker = new Ticker(contractDetails);
             ticker.ContractDetails = contractDetails;
             mTickers.Add(ticker);
@@ -561,7 +561,7 @@ namespace ContractInspector
             if (mDOMTickers[marketDepthIndex] == null)
                 return;
 
-            logMessage($"Stopping market depth: {contractToString(mDOMTickers[marketDepthIndex].ContractDetails.Summary)}");
+            logMessage($"Stopping market depth: {contractToString(mDOMTickers[marketDepthIndex].ContractDetails.Contract)}");
             mDOMTickers[marketDepthIndex] = null;
             mApi.cancelMktDepth(mNextDOMTickerId - 1);
 
@@ -570,7 +570,7 @@ namespace ContractInspector
 
         private void stopTicker(int tickerId)
         {
-            logMessage($"Stopping ticker: {contractToString(mTickers[tickerId].ContractDetails.Summary)}");
+            logMessage($"Stopping ticker: {contractToString(mTickers[tickerId].ContractDetails.Contract)}");
             mApi.cancelMktData(tickerId);
             mTickers[tickerId].ContractDetails = null;
             TickerGrid.Rows.Remove(mTickers[tickerId].GridRow);
