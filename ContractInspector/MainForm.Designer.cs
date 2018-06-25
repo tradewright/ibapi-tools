@@ -57,6 +57,7 @@ namespace ContractInspector
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.StartMarketDepthButton = new System.Windows.Forms.Button();
             this.StartTickersButton = new System.Windows.Forms.Button();
+            this.StartSnapshotsButton = new System.Windows.Forms.Button();
             this.SplitContainer2 = new System.Windows.Forms.SplitContainer();
             this.ReqContractDetailsButton = new System.Windows.Forms.Button();
             this.ContractSpecifierPanel = new System.Windows.Forms.Panel();
@@ -143,7 +144,6 @@ namespace ContractInspector
             this.ServerTextBox = new System.Windows.Forms.TextBox();
             this.Label13 = new System.Windows.Forms.Label();
             this.ConnectDisconnectButton = new System.Windows.Forms.Button();
-            this.StartSnapshotsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer2)).BeginInit();
             this.SplitContainer2.Panel1.SuspendLayout();
@@ -213,6 +213,19 @@ namespace ContractInspector
             this.toolTip1.SetToolTip(this.StartTickersButton, "Start realtime market data \r\nfor selected contract(s)");
             this.StartTickersButton.UseVisualStyleBackColor = true;
             this.StartTickersButton.Click += new System.EventHandler(this.StartTickersButton_Click);
+            // 
+            // StartSnapshotsButton
+            // 
+            this.StartSnapshotsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.StartSnapshotsButton.Enabled = false;
+            this.StartSnapshotsButton.Location = new System.Drawing.Point(113, 410);
+            this.StartSnapshotsButton.Name = "StartSnapshotsButton";
+            this.StartSnapshotsButton.Size = new System.Drawing.Size(100, 35);
+            this.StartSnapshotsButton.TabIndex = 23;
+            this.StartSnapshotsButton.Text = "Start snapshot(s)";
+            this.toolTip1.SetToolTip(this.StartSnapshotsButton, "Start realtime market data \r\nfor selected contract(s)");
+            this.StartSnapshotsButton.UseVisualStyleBackColor = true;
+            this.StartSnapshotsButton.Click += new System.EventHandler(this.StartSnapshotsButton_Click);
             // 
             // SplitContainer2
             // 
@@ -1018,7 +1031,7 @@ namespace ContractInspector
             this.TickerGrid.ReadOnly = true;
             this.TickerGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.TickerGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.TickerGrid.Size = new System.Drawing.Size(605, 407);
+            this.TickerGrid.Size = new System.Drawing.Size(809, 407);
             this.TickerGrid.TabIndex = 11;
             this.TickerGrid.SelectionChanged += new System.EventHandler(this.TickerGrid_SelectionChanged);
             // 
@@ -1147,6 +1160,7 @@ namespace ContractInspector
             dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.AskGrid.DefaultCellStyle = dataGridViewCellStyle14;
+            this.AskGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AskGrid.EnableHeadersVisualStyles = false;
             this.AskGrid.Location = new System.Drawing.Point(406, 3);
             this.AskGrid.Name = "AskGrid";
@@ -1154,7 +1168,7 @@ namespace ContractInspector
             this.AskGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.AskGrid.RowHeadersVisible = false;
             this.AskGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.AskGrid.Size = new System.Drawing.Size(284, 401);
+            this.AskGrid.Size = new System.Drawing.Size(397, 401);
             this.AskGrid.TabIndex = 14;
             // 
             // DataGridViewTextBoxColumn1
@@ -1224,6 +1238,7 @@ namespace ContractInspector
             dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.BidGrid.DefaultCellStyle = dataGridViewCellStyle18;
+            this.BidGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BidGrid.EnableHeadersVisualStyles = false;
             this.BidGrid.Location = new System.Drawing.Point(3, 3);
             this.BidGrid.Name = "BidGrid";
@@ -1231,7 +1246,7 @@ namespace ContractInspector
             this.BidGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.BidGrid.RowHeadersVisible = false;
             this.BidGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.BidGrid.Size = new System.Drawing.Size(337, 401);
+            this.BidGrid.Size = new System.Drawing.Size(397, 401);
             this.BidGrid.TabIndex = 13;
             // 
             // MarketMaker
@@ -1388,19 +1403,6 @@ namespace ContractInspector
             this.ConnectDisconnectButton.Text = "Connect";
             this.ConnectDisconnectButton.UseVisualStyleBackColor = true;
             this.ConnectDisconnectButton.Click += new System.EventHandler(this.ConnectDisconnectButton_Click);
-            // 
-            // StartSnapshotsButton
-            // 
-            this.StartSnapshotsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.StartSnapshotsButton.Enabled = false;
-            this.StartSnapshotsButton.Location = new System.Drawing.Point(113, 410);
-            this.StartSnapshotsButton.Name = "StartSnapshotsButton";
-            this.StartSnapshotsButton.Size = new System.Drawing.Size(100, 35);
-            this.StartSnapshotsButton.TabIndex = 23;
-            this.StartSnapshotsButton.Text = "Start snapshot(s)";
-            this.toolTip1.SetToolTip(this.StartSnapshotsButton, "Start realtime market data \r\nfor selected contract(s)");
-            this.StartSnapshotsButton.UseVisualStyleBackColor = true;
-            this.StartSnapshotsButton.Click += new System.EventHandler(this.StartSnapshotsButton_Click);
             // 
             // MainForm
             // 

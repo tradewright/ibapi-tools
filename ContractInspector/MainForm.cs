@@ -147,7 +147,6 @@ namespace ContractInspector
             PortTextBox.Text = Port.ToString();
             ClientIdTextBox.Text = ClientId.ToString();
 
-            SecTypeCombo.SelectedItem = "FUT";
             base.OnLoad(e);
         }
 
