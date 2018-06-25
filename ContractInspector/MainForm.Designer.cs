@@ -34,24 +34,24 @@ namespace ContractInspector
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             this.LogText = new System.Windows.Forms.TextBox();
             this.ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -143,6 +143,7 @@ namespace ContractInspector
             this.ServerTextBox = new System.Windows.Forms.TextBox();
             this.Label13 = new System.Windows.Forms.Label();
             this.ConnectDisconnectButton = new System.Windows.Forms.Button();
+            this.StartSnapshotsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer2)).BeginInit();
             this.SplitContainer2.Panel1.SuspendLayout();
@@ -191,10 +192,10 @@ namespace ContractInspector
             // 
             this.StartMarketDepthButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.StartMarketDepthButton.Enabled = false;
-            this.StartMarketDepthButton.Location = new System.Drawing.Point(112, 410);
+            this.StartMarketDepthButton.Location = new System.Drawing.Point(219, 410);
             this.StartMarketDepthButton.Name = "StartMarketDepthButton";
             this.StartMarketDepthButton.Size = new System.Drawing.Size(100, 35);
-            this.StartMarketDepthButton.TabIndex = 31;
+            this.StartMarketDepthButton.TabIndex = 24;
             this.StartMarketDepthButton.Text = "Start market depth";
             this.toolTip1.SetToolTip(this.StartMarketDepthButton, "Start market depth\r\nfor selected contract(s)");
             this.StartMarketDepthButton.UseVisualStyleBackColor = true;
@@ -771,6 +772,7 @@ namespace ContractInspector
             // ContractsTabPage
             // 
             this.ContractsTabPage.BackColor = System.Drawing.Color.Azure;
+            this.ContractsTabPage.Controls.Add(this.StartSnapshotsButton);
             this.ContractsTabPage.Controls.Add(this.ContractFetchProgressBar);
             this.ContractsTabPage.Controls.Add(this.ContractFetchStatusLabel);
             this.ContractsTabPage.Controls.Add(this.ContractsCountLabel);
@@ -789,16 +791,16 @@ namespace ContractInspector
             this.ContractFetchProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ContractFetchProgressBar.ForeColor = System.Drawing.Color.PowderBlue;
-            this.ContractFetchProgressBar.Location = new System.Drawing.Point(343, 420);
+            this.ContractFetchProgressBar.Location = new System.Drawing.Point(524, 420);
             this.ContractFetchProgressBar.Name = "ContractFetchProgressBar";
-            this.ContractFetchProgressBar.Size = new System.Drawing.Size(362, 22);
+            this.ContractFetchProgressBar.Size = new System.Drawing.Size(181, 22);
             this.ContractFetchProgressBar.TabIndex = 34;
             this.ContractFetchProgressBar.Visible = false;
             // 
             // ContractFetchStatusLabel
             // 
             this.ContractFetchStatusLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ContractFetchStatusLabel.Location = new System.Drawing.Point(232, 420);
+            this.ContractFetchStatusLabel.Location = new System.Drawing.Point(425, 420);
             this.ContractFetchStatusLabel.Name = "ContractFetchStatusLabel";
             this.ContractFetchStatusLabel.Size = new System.Drawing.Size(105, 22);
             this.ContractFetchStatusLabel.TabIndex = 33;
@@ -821,8 +823,8 @@ namespace ContractInspector
             this.ContractGrid.AllowUserToAddRows = false;
             this.ContractGrid.AllowUserToDeleteRows = false;
             this.ContractGrid.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.ContractGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.ContractGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.ContractGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -831,14 +833,14 @@ namespace ContractInspector
             this.ContractGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ContractGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.ContractGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ContractGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ContractGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.ContractGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ContractGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ContractId,
@@ -852,14 +854,14 @@ namespace ContractInspector
             this.ContractStrike,
             this.ContractRight,
             this.ContractMultiplier});
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle25.ForeColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ContractGrid.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ContractGrid.DefaultCellStyle = dataGridViewCellStyle7;
             this.ContractGrid.EnableHeadersVisualStyles = false;
             this.ContractGrid.Location = new System.Drawing.Point(0, 0);
             this.ContractGrid.Name = "ContractGrid";
@@ -872,33 +874,33 @@ namespace ContractInspector
             // 
             // ContractId
             // 
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.DimGray;
-            this.ContractId.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.DimGray;
+            this.ContractId.DefaultCellStyle = dataGridViewCellStyle3;
             this.ContractId.HeaderText = "Contract Id";
             this.ContractId.Name = "ContractId";
             this.ContractId.ReadOnly = true;
             // 
             // ContractLocalSymbol
             // 
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.ContractLocalSymbol.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.ContractLocalSymbol.DefaultCellStyle = dataGridViewCellStyle4;
             this.ContractLocalSymbol.HeaderText = "Local Symbol";
             this.ContractLocalSymbol.Name = "ContractLocalSymbol";
             this.ContractLocalSymbol.ReadOnly = true;
             // 
             // ContractSecType
             // 
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.ContractSecType.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.ContractSecType.DefaultCellStyle = dataGridViewCellStyle5;
             this.ContractSecType.HeaderText = "Sec Type";
             this.ContractSecType.Name = "ContractSecType";
             this.ContractSecType.ReadOnly = true;
             // 
             // ContractSymbol
             // 
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.ContractSymbol.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.ContractSymbol.DefaultCellStyle = dataGridViewCellStyle6;
             this.ContractSymbol.HeaderText = "Symbol";
             this.ContractSymbol.Name = "ContractSymbol";
             this.ContractSymbol.ReadOnly = true;
@@ -974,8 +976,8 @@ namespace ContractInspector
             this.TickerGrid.AllowUserToAddRows = false;
             this.TickerGrid.AllowUserToDeleteRows = false;
             this.TickerGrid.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.TickerGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.TickerGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
             this.TickerGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -984,14 +986,14 @@ namespace ContractInspector
             this.TickerGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TickerGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.TickerGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle27.ForeColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.TickerGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.TickerGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.TickerGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.TickerGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Symbol,
@@ -1002,14 +1004,14 @@ namespace ContractInspector
             this.Ask,
             this.AskSize,
             this.Volume});
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle28.ForeColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.TickerGrid.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.TickerGrid.DefaultCellStyle = dataGridViewCellStyle10;
             this.TickerGrid.EnableHeadersVisualStyles = false;
             this.TickerGrid.Location = new System.Drawing.Point(0, 0);
             this.TickerGrid.Name = "TickerGrid";
@@ -1115,21 +1117,21 @@ namespace ContractInspector
             this.AskGrid.AllowUserToAddRows = false;
             this.AskGrid.AllowUserToDeleteRows = false;
             this.AskGrid.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.AskGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.AskGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
             this.AskGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.AskGrid.BackgroundColor = System.Drawing.Color.White;
             this.AskGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.AskGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.AskGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.AskGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.AskGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.AskGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.AskGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DataGridViewTextBoxColumn1,
@@ -1137,14 +1139,14 @@ namespace ContractInspector
             this.DataGridViewTextBoxColumn6,
             this.DataGridViewTextBoxColumn7,
             this.DataGridViewTextBoxColumn8});
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle32.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle32.ForeColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.AskGrid.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.AskGrid.DefaultCellStyle = dataGridViewCellStyle14;
             this.AskGrid.EnableHeadersVisualStyles = false;
             this.AskGrid.Location = new System.Drawing.Point(406, 3);
             this.AskGrid.Name = "AskGrid";
@@ -1181,8 +1183,8 @@ namespace ContractInspector
             // 
             // DataGridViewTextBoxColumn8
             // 
-            dataGridViewCellStyle31.Format = "0.000000";
-            this.DataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle13.Format = "0.000000";
+            this.DataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle13;
             this.DataGridViewTextBoxColumn8.HeaderText = "Avg price";
             this.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8";
             this.DataGridViewTextBoxColumn8.ReadOnly = true;
@@ -1192,21 +1194,21 @@ namespace ContractInspector
             this.BidGrid.AllowUserToAddRows = false;
             this.BidGrid.AllowUserToDeleteRows = false;
             this.BidGrid.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle33.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.BidGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.BidGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle15;
             this.BidGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.BidGrid.BackgroundColor = System.Drawing.Color.White;
             this.BidGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.BidGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.BidGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle34.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle34.ForeColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle34.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle34.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.BidGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.BidGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.BidGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.BidGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MarketMaker,
@@ -1214,14 +1216,14 @@ namespace ContractInspector
             this.DataGridViewTextBoxColumn2,
             this.DataGridViewTextBoxColumn4,
             this.AveragePrice});
-            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle36.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle36.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle36.ForeColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle36.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle36.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.BidGrid.DefaultCellStyle = dataGridViewCellStyle36;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.BidGrid.DefaultCellStyle = dataGridViewCellStyle18;
             this.BidGrid.EnableHeadersVisualStyles = false;
             this.BidGrid.Location = new System.Drawing.Point(3, 3);
             this.BidGrid.Name = "BidGrid";
@@ -1258,8 +1260,8 @@ namespace ContractInspector
             // 
             // AveragePrice
             // 
-            dataGridViewCellStyle35.Format = "0.000000";
-            this.AveragePrice.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyle17.Format = "0.000000";
+            this.AveragePrice.DefaultCellStyle = dataGridViewCellStyle17;
             this.AveragePrice.HeaderText = "Avg price";
             this.AveragePrice.Name = "AveragePrice";
             this.AveragePrice.ReadOnly = true;
@@ -1386,6 +1388,19 @@ namespace ContractInspector
             this.ConnectDisconnectButton.Text = "Connect";
             this.ConnectDisconnectButton.UseVisualStyleBackColor = true;
             this.ConnectDisconnectButton.Click += new System.EventHandler(this.ConnectDisconnectButton_Click);
+            // 
+            // StartSnapshotsButton
+            // 
+            this.StartSnapshotsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.StartSnapshotsButton.Enabled = false;
+            this.StartSnapshotsButton.Location = new System.Drawing.Point(113, 410);
+            this.StartSnapshotsButton.Name = "StartSnapshotsButton";
+            this.StartSnapshotsButton.Size = new System.Drawing.Size(100, 35);
+            this.StartSnapshotsButton.TabIndex = 23;
+            this.StartSnapshotsButton.Text = "Start snapshot(s)";
+            this.toolTip1.SetToolTip(this.StartSnapshotsButton, "Start realtime market data \r\nfor selected contract(s)");
+            this.StartSnapshotsButton.UseVisualStyleBackColor = true;
+            this.StartSnapshotsButton.Click += new System.EventHandler(this.StartSnapshotsButton_Click);
             // 
             // MainForm
             // 
@@ -1517,6 +1532,7 @@ namespace ContractInspector
         private DataGridViewTextBoxColumn ContractRight;
         private DataGridViewTextBoxColumn ContractMultiplier;
         private Panel ContractSpecifierPanel;
+        private Button StartSnapshotsButton;
     }
 }
 

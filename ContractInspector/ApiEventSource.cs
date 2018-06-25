@@ -47,24 +47,20 @@ namespace ContractInspector
     ///  base implementations.
     /// 
     /// </remarks>
-    public class ApiEventSource : DefaultEWrapper
-    {
+    public class ApiEventSource : DefaultEWrapper {
         private MainForm mUI;
         private SynchronizationContext mSyncContext;
 
-        internal ApiEventSource(MainForm UI, SynchronizationContext syncContext)
-        {
+        internal ApiEventSource(MainForm UI, SynchronizationContext syncContext) {
             this.mUI = UI;
             this.mSyncContext = syncContext;
         }
 
-        public override void connectAck()
-        {
+        public override void connectAck() {
             mSyncContext.Post((t) => mUI.connectAck(), null);
         }
 
-        public override void connectionClosed()
-        {
+        public override void connectionClosed() {
             mSyncContext.Post((t) => mUI.connectionClosed(), null);
         }
 
@@ -76,50 +72,46 @@ namespace ContractInspector
             mSyncContext.Post((t) => mUI.contractDetailsEnd(reqId), null);
         }
 
-        public override void currentTime(long time)
-        {
+        public override void currentTime(long time) {
             mSyncContext.Post((t) => mUI.currentTime(time), null);
         }
 
-        public override void error(Exception e)
-        {
+        public override void error(Exception e) {
             mSyncContext.Post((t) => mUI.error(e), null);
         }
 
-        public override void error(string str)
-        {
+        public override void error(string str) {
             mSyncContext.Post((t) => mUI.error(str), null);
         }
 
-        public override void error(int id, int errorCode, string errorMsg)
-        {
+        public override void error(int id, int errorCode, string errorMsg) {
             mSyncContext.Post((t) => mUI.error(id, errorCode, errorMsg), null);
         }
 
-        public override void managedAccounts(string accountsList)
-        {
+        public override void managedAccounts(string accountsList) {
             mSyncContext.Post((t) => mUI.managedAccounts(accountsList), null);
         }
 
-        public override void tickGeneric(int tickerId, int field, double value)
-        {
+        public override void tickGeneric(int tickerId, int field, double value) {
             mSyncContext.Post((t) => mUI.tickGeneric(tickerId, field, value), null);
         }
 
-        public override void tickString( int tickerId, int field, string value)
-        {
+        public override void tickString(int tickerId, int field, string value) {
             mSyncContext.Post((t) => mUI.tickString(tickerId, field, value), null);
         }
 
-        public override void tickPrice(int tickerId, int tickType, double price, TickAttrib attribs)
-        {
+        public override void tickPrice(int tickerId, int tickType, double price, TickAttrib attribs) {
             mSyncContext.Post((t) => mUI.tickPrice(tickerId, tickType, price, attribs), null);
         }
 
-        public override void tickSize(int tickerId, int tickType, int size)
-        {
+        public override void tickSize(int tickerId, int tickType, int size) {
             mSyncContext.Post((t) => mUI.tickSize(tickerId, tickType, size), null);
         }
+
+        public override void tickSnapshotEnd(int tickerId) {
+            mSyncContext.Post((t) => mUI.tickSnapshotEnd(tickerId), null);
+        }
+
 
         public override void updateMktDepth(int tickerId, int position, int operation, int side, double price, int size)
         {

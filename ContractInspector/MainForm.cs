@@ -179,6 +179,7 @@ namespace ContractInspector
 
         private void ContractGrid_SelectionChanged(object sender, EventArgs e) {
             StartTickersButton.Enabled = (ContractGrid.SelectedRows.Count > 0);
+            StartSnapshotsButton.Enabled = (ContractGrid.SelectedRows.Count > 0);
             StartMarketDepthButton.Enabled = (ContractGrid.SelectedRows.Count == 1);
         }
 
@@ -263,20 +264,13 @@ namespace ContractInspector
             TabControl1.SelectedTab = MarketDepthTabPage;
         }
 
-        private void StartTickersButton_Click(object sender, EventArgs e)
+        private async void StartSnapshotsButton_Click(object sender, EventArgs e) {
+            await startTickersAsync(true);
+        }
+
+        private async void StartTickersButton_Click(object sender, EventArgs e)
         {
-            var selectedContractDetails = new List<ContractDetails>();
-            foreach (DataGridViewRow row in ContractGrid.SelectedRows) {
-                selectedContractDetails.Add((ContractDetails)row.Tag);
-            }
-            selectedContractDetails.Sort(new ContractDetailsComparer());
-
-            foreach (ContractDetails contractDetails in selectedContractDetails) {
-                startTicker(contractDetails);
-            }
-
-            TabControl1.SelectedTab = TickersTabPage;
-            TickerGrid.ClearSelection();
+            await startTickersAsync(false);
         }
 
         private void StopMarketDepthButton_Click(object sender, EventArgs e) {
@@ -384,11 +378,6 @@ namespace ContractInspector
             logMessage(string.Format($"tickGeneric: id={tickerId}; field={field}; value={field}"));
         }
 
-        internal void tickString(int tickerId, int field, string value)
-        {
-            logMessage(string.Format($"tickString: id={tickerId}; field={field}; value={value}"));
-        }
-
         public void tickPrice(int tickerId, int tickType, double price, TickAttrib attribs)
         {
             var cd = mTickers[tickerId].ContractDetails;
@@ -423,6 +412,14 @@ namespace ContractInspector
                 showTickerValue(tickerId, TickerColumnVolume, size.ToString());
                 break;
             }
+        }
+
+        internal void tickSnapshotEnd(int tickerId) {
+            logMessage($"tickSnapshotEnd: id={tickerId}");
+        }
+
+        internal void tickString(int tickerId, int field, string value) {
+            logMessage(string.Format($"tickString: id={tickerId}; field={field}; value={value}"));
         }
 
         internal void updateMktDepth(int tickerId, int position, string marketMaker, int operation, int side, double price, int size)
@@ -500,7 +497,7 @@ namespace ContractInspector
         private void logMessage(string pMsg)
         {
             if (!LogText.IsDisposed)
-                LogText.AppendText($"{ DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss.fff")}  {pMsg}\r\n");
+                LogText.AppendText($"{ DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff")}  {pMsg}\r\n");
         }
 
         private void setConnectionState(ConnectionState state) {
@@ -554,17 +551,33 @@ namespace ContractInspector
             mDOMTickers.Add(ticker);
         }
 
-        private void startTicker(ContractDetails contractDetails)
+        private void startMarketData(ContractDetails contractDetails, bool snapshot)
         {
             logMessage($"Starting ticker: {contractToString(contractDetails.Contract)}");
 
             var id = mNextTickerId++;
-            mApi.reqMktData(id, contractDetails.Contract, "", false, false, null);
+            mApi.reqMktData(id, contractDetails.Contract, "", snapshot, false, null);
             Ticker ticker = new Ticker(contractDetails);
             ticker.ContractDetails = contractDetails;
             mTickers.Add(ticker);
         }
 
+        private async Task startTickersAsync(bool snapshot) {
+            var selectedContractDetails = new List<ContractDetails>();
+            foreach (DataGridViewRow row in ContractGrid.SelectedRows) {
+                selectedContractDetails.Add((ContractDetails)row.Tag);
+            }
+            selectedContractDetails.Sort(new ContractDetailsComparer());
+
+            TabControl1.SelectedTab = TickersTabPage;
+            TickerGrid.ClearSelection();
+
+            foreach (ContractDetails contractDetails in selectedContractDetails) {
+                startMarketData(contractDetails, snapshot);
+                await Task.Delay(12);
+            }
+
+        }
         private void stopAllTickers()
         {
             logMessage("Stopping all tickers");
@@ -670,7 +683,7 @@ namespace ContractInspector
             }
         }
 
-#endregion
+        #endregion
 
     }
 
