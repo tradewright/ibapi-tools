@@ -556,8 +556,10 @@ namespace ContractInspector
             logMessage($"Starting ticker: id={id}; {contractToString(contractDetails.Contract)}");
 
             mApi.reqMktData(id, contractDetails.Contract, "", snapshot, false, null);
-            Ticker ticker = new Ticker(contractDetails);
-            ticker.ContractDetails = contractDetails;
+            Ticker ticker = new Ticker(contractDetails) {
+                ContractDetails = contractDetails,
+                IsSnapshot = true
+            };
             mTickers.Add(ticker);
         }
 
@@ -596,17 +598,21 @@ namespace ContractInspector
             if (mDOMTickers[marketDepthIndex] == null)
                 return;
 
-            logMessage($"Stopping market depth: {contractToString(mDOMTickers[marketDepthIndex].ContractDetails.Contract)}");
-            mDOMTickers[marketDepthIndex] = null;
-            mApi.cancelMktDepth(mNextDOMTickerId - 1);
+            var id = mNextDOMTickerId - 1;
+            logMessage($"Stopping market depth: id={id}; {contractToString(mDOMTickers[marketDepthIndex].ContractDetails.Contract)}");
+            mApi.cancelMktDepth(id);
 
+            mDOMTickers[marketDepthIndex] = null;
             mDepthMgr.Clear();
         }
 
         private void stopTicker(int tickerId)
         {
-            logMessage($"Stopping ticker: {contractToString(mTickers[tickerId].ContractDetails.Contract)}");
-            mApi.cancelMktData(tickerId);
+            logMessage($"Stopping ticker: id={tickerId}; {contractToString(mTickers[tickerId].ContractDetails.Contract)}");
+
+            if (!mTickers[tickerId].IsSnapshot)
+                mApi.cancelMktData(tickerId);
+
             mTickers[tickerId].ContractDetails = null;
             TickerGrid.Rows.Remove(mTickers[tickerId].GridRow);
             mTickers[tickerId].GridRow = null;

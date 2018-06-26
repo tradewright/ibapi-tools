@@ -49,6 +49,8 @@ namespace ContractInspector
         /// <returns/>
         internal DataGridViewRow GridRow { get; set; }
 
+        internal bool IsSnapshot { get; set; }
+
         private Ticker() { }
 
         internal Ticker(ContractDetails contractDetails) {
