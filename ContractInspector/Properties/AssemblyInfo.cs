@@ -1,4 +1,5 @@
-﻿#region License
+﻿using System.Runtime.InteropServices;
+#region License
 
 // The MIT License (MIT)
 //
@@ -32,3 +33,5 @@ using System.Reflection;
 [assembly: AssemblyCopyright("Copyright © Richard L King 2018")]
 
 [assembly: AssemblyVersion("1.1.0.0")]
+[assembly: ComVisible(false)]
+
