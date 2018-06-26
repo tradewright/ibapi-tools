@@ -464,7 +464,7 @@ namespace ContractInspector
 
         private string contractToString(Contract contract)
         {
-            return String.Format($"secType={contract.SecType}; localSymbol={contract.LocalSymbol}; exchange={contract.Exchange}; currency={contract.Currency}");
+            return String.Format($"secType={contract.SecType}; localSymbol={contract.LocalSymbol.Replace(" ", "\u00B7")}; exchange={contract.Exchange}; currency={contract.Currency}");
         }
 
         private void disconnectFromTWS()
@@ -490,7 +490,7 @@ namespace ContractInspector
             var row = TickerGrid.Rows[TickerGrid.Rows.Add()];
             row.Tag = (object)tickerId;
             mTickers[tickerId].GridRow = row;
-            showTickerValue(tickerId, TickerColumnSymbol, mTickers[tickerId].ContractDetails.Contract.LocalSymbol);
+            showTickerValue(tickerId, TickerColumnSymbol, mTickers[tickerId].ContractDetails.Contract.LocalSymbol.Replace(" ", "\u00B7"));
         }
 
         private void logMessage(string pMsg)
