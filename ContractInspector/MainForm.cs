@@ -543,8 +543,8 @@ namespace ContractInspector
 
         private void startMarketDepth(ContractDetails contractDetails)
         {
-            logMessage($"Starting market depth: {contractToString(contractDetails.Contract)}");
             var id = mNextDOMTickerId++;
+            logMessage($"Starting market depth: id={id}; {contractToString(contractDetails.Contract)}");
             mApi.reqMarketDepth(id, contractDetails.Contract, 20, null);
             Ticker ticker = new Ticker(contractDetails);
             mDOMTickers.Add(ticker);
