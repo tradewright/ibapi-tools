@@ -552,9 +552,9 @@ namespace ContractInspector
 
         private void startMarketData(ContractDetails contractDetails, bool snapshot)
         {
-            logMessage($"Starting ticker: {contractToString(contractDetails.Contract)}");
-
             var id = mNextTickerId++;
+            logMessage($"Starting ticker: id={id}; {contractToString(contractDetails.Contract)}");
+
             mApi.reqMktData(id, contractDetails.Contract, "", snapshot, false, null);
             Ticker ticker = new Ticker(contractDetails);
             ticker.ContractDetails = contractDetails;
