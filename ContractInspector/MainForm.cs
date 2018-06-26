@@ -235,7 +235,7 @@ namespace ContractInspector
                     showContractValue(row, ContractColumnCurrency, c.Currency);
                     showContractValue(row, ContractColumnExchange, c.Exchange);
                     showContractValue(row, ContractColumnExpiry, c.LastTradeDateOrContractMonth);
-                    showContractValue(row, ContractColumnLocalSymbol, c.LocalSymbol);
+                    showContractValue(row, ContractColumnLocalSymbol, c.LocalSymbol.Replace(" ", "\u00B7"));
                     showContractValue(row, ContractColumnMultiplier, c.Multiplier);
                     showContractValue(row, ContractColumnRight, c.Right);
                     showContractValue(row, ContractColumnType, c.SecType);
