@@ -53,12 +53,12 @@ namespace ContractInspector
         private const string SixtyFourthsSeparator = "''";
         private const string SixtyFourthsAndFractionsSeparator = "''";
 
-        private const string ExactThirtySecondIndicator = "0";
+        private const string ExactThirtySecondIndicator = "";
         private const string QuarterThirtySecondIndicator = "¼";
         private const string HalfThirtySecondIndicator = "+";
         private const string ThreeQuarterThirtySecondIndicator = "¾";
 
-        private const string ExactSixtyFourthIndicator = "''";
+        private const string ExactSixtyFourthIndicator = "";
         private const string HalfSixtyFourthIndicator = "+";
 
         public static string FormatPrice(double pPrice, string pSecType, double pTickSize) {
@@ -75,7 +75,7 @@ namespace ContractInspector
 
             if (pTickSize == OneHundredTwentyEighth) {
                 if (pSecType == "FUT")
-                    return FormatPriceAs32ndsAndFractions(pPrice);
+                    return FormatPriceAs64thsAndFractions(pPrice);
                 return FormatPriceAs64thsAndFractions(pPrice);
             }
 
@@ -84,60 +84,56 @@ namespace ContractInspector
 
         public static string FormatPriceAs32nds(double pPrice) {
             var priceInt = Math.Floor(pPrice);
-            var fract = pPrice - priceInt;
-            var numerator = fract * 32;
-            return $"{(int)priceInt,0:d}{ThirtySecondsSeparator}{numerator,1:00}";
+            var numberOf32nds = (int)Math.Floor((pPrice - priceInt) * 32);
+            return $"{(int)priceInt:d}{ThirtySecondsSeparator}{numberOf32nds:00}";
         }
 
         public static string FormatPriceAs32ndsAndFractions(double pPrice) {
             var priceInt = Math.Floor(pPrice);
-            var fract = pPrice - priceInt;
-            var numerator = (int)(Math.Floor(fract * 128));
+            var numberOf128ths = (int)(Math.Floor((pPrice - priceInt) * 128));
             int rem;
-            Math.DivRem(numerator, 4, out rem);
-            var priceString = $"{(int)priceInt,0:d}{ThirtySecondsAndFractionsSeparator}{rem,1:00}";
+            var numberOf32nds = Math.DivRem(numberOf128ths, 4, out rem);
+            var remString = "";
             switch (rem) {
             case 0:
-                priceString = priceString + ExactThirtySecondIndicator;
+                remString = ExactThirtySecondIndicator;
                 break;
             case 1:
-                priceString = priceString + QuarterThirtySecondIndicator;
+                remString = QuarterThirtySecondIndicator;
                 break;
             case 2:
-                priceString = priceString + HalfThirtySecondIndicator;
+                remString = HalfThirtySecondIndicator;
                 break;
             case 3:
-                priceString = priceString + ThreeQuarterThirtySecondIndicator;
+                remString = ThreeQuarterThirtySecondIndicator;
                 break;
             }
 
-            return priceString;
+            return $"{(int)priceInt:d}{ThirtySecondsAndFractionsSeparator}{(int)numberOf32nds:00}{remString}";
         }
 
         public static string FormatPriceAs64ths(double pPrice) {
             var priceInt = Math.Floor(pPrice);
-            var fract = pPrice - priceInt;
-            var numerator = (int)Math.Floor(fract * 64);
-            return $"{(int)priceInt,0:d}{SixtyFourthsSeparator}{numerator,1:00}";
+            var numberOf64ths = (int)Math.Floor((pPrice - priceInt) * 64);
+            return $"{(int)priceInt:d}{SixtyFourthsSeparator}{numberOf64ths:00}";
         }
 
         public static string FormatPriceAs64thsAndFractions(double pPrice) {
             var priceInt = Math.Floor(pPrice);
-            var fract = pPrice - priceInt;
-            var numerator = (int)Math.Floor(fract * 128);
+            var numberOf128ths = (int)(Math.Floor((pPrice - priceInt) * 128));
             int rem;
-            rem = Math.DivRem(numerator, 2, out rem);
-            var priceString = $"{(int)priceInt,0:d}{SixtyFourthsAndFractionsSeparator}{rem,1:00}";
+            var numberOf64ths = Math.DivRem(numberOf128ths, 2, out rem);
+            var remString = "";
             switch (rem) {
             case 0:
-                priceString = priceString + ExactSixtyFourthIndicator;
+                remString = ExactSixtyFourthIndicator;
                 break;
             case 1:
-                priceString = priceString + HalfSixtyFourthIndicator;
+                remString = HalfSixtyFourthIndicator;
                 break;
             }
 
-            return priceString; // + SixtyFourthsAndFractionsTerminator;
+            return $"{(int)priceInt:d}{SixtyFourthsAndFractionsSeparator}{(int)numberOf64ths:00}{remString}";
         }
 
         public static string FormatPriceAsDecimals(double pPrice, double pTickSize) {
