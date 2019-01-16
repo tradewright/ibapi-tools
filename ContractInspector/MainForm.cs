@@ -193,7 +193,7 @@ namespace ContractInspector
                 ConId = int.Parse(ConIdText.Text),
                 Currency = CurrencyText.Text,
                 Exchange = ExchangeText.Text,
-                IncludeExpired = int.Parse(IncludeExpiredText.Text) == 0 ? false : true,
+                IncludeExpired = int.Parse(IncludeExpiredText.Text) != 0,
                 LastTradeDateOrContractMonth = LastTradeDateOrContractMonthText.Text,
                 LocalSymbol = LocalSymbolText.Text,
                 Multiplier = MultiplierText.Text,
@@ -332,8 +332,8 @@ namespace ContractInspector
             logMessage("Disconnected from TWS");
         }
 
-        internal void contractDetails(int reqId, ContractDetails contractDetails) {
-            mContractFetcher.AddContractDetails(contractDetails);
+        internal void contractDetails(int reqId, ContractDetails contractData) {
+            mContractFetcher.AddContractDetails(contractData);
         }
 
         internal void contractDetailsEnd(int reqId) {
@@ -374,7 +374,7 @@ namespace ContractInspector
 
         internal void tickGeneric(int tickerId, int field, double value)
         {
-            logMessage(string.Format($"tickGeneric: id={tickerId}; field={field}; value={field}"));
+            logMessage(string.Format($"tickGeneric: id={tickerId}; field={field}; value={value}"));
         }
 
         public void tickPrice(int tickerId, int tickType, double price, TickAttrib attribs)
@@ -421,7 +421,7 @@ namespace ContractInspector
             logMessage(string.Format($"tickString: id={tickerId}; field={field}; value={value}"));
         }
 
-        internal void updateMktDepth(int tickerId, int position, string marketMaker, int operation, int side, double price, int size)
+        internal void updateMktDepth(int tickerId, int position, string marketMaker, int operation, int side, double price, int size, bool isSmartDepth)
         {
             if (mDOMTickers[tickerId - MinimumMarketDepthId]?.ContractDetails == null)
                 // the market depth stream has been stopped but this
@@ -542,24 +542,24 @@ namespace ContractInspector
             mTickers[tickerId].GridRow.Cells[columnName].Value = value;
         }
 
-        private void startMarketDepth(ContractDetails contractDetails)
+        private void startMarketDepth(ContractDetails contractData)
         {
             var id = mNextDOMTickerId++;
-            logMessage($"Starting market depth: id={id}; {contractToString(contractDetails.Contract)}");
-            mApi.reqMarketDepth(id, contractDetails.Contract, 20, null);
-            Ticker ticker = new Ticker(contractDetails);
+            logMessage($"Starting market depth: id={id}; {contractToString(contractData.Contract)}");
+            mApi.reqMarketDepth(id, contractData.Contract, 20, false, null);
+            Ticker ticker = new Ticker(contractData);
             mDOMTickers.Add(ticker);
         }
 
-        private void startMarketData(ContractDetails contractDetails, bool snapshot)
+        private void startMarketData(ContractDetails contractData, bool snapshot)
         {
             var id = mNextTickerId++;
-            logMessage($"Starting ticker: id={id}; {contractToString(contractDetails.Contract)}");
+            logMessage($"Starting ticker: id={id}; {contractToString(contractData.Contract)}");
 
-            mApi.reqMktData(id, contractDetails.Contract, "", snapshot, false, null);
-            Ticker ticker = new Ticker(contractDetails) {
-                ContractDetails = contractDetails,
-                FormatPrice = PriceFormatter.GetPriceFormatter(contractDetails.Contract.SecType, contractDetails.MinTick * contractDetails.PriceMagnifier),
+            mApi.reqMktData(id, contractData.Contract, "", snapshot, false, null);
+            Ticker ticker = new Ticker(contractData) {
+                ContractDetails = contractData,
+                FormatPrice = PriceFormatter.GetPriceFormatter(contractData.Contract.SecType, contractData.MinTick * contractData.PriceMagnifier),
                 IsSnapshot = true
             };
             mTickers.Add(ticker);
@@ -575,8 +575,8 @@ namespace ContractInspector
             TabControl1.SelectedTab = TickersTabPage;
             TickerGrid.ClearSelection();
 
-            foreach (ContractDetails contractDetails in selectedContractDetails) {
-                startMarketData(contractDetails, snapshot);
+            foreach (ContractDetails contractData in selectedContractDetails) {
+                startMarketData(contractData, snapshot);
                 await Task.Delay(12);
             }
 
@@ -602,7 +602,7 @@ namespace ContractInspector
 
             var id = mNextDOMTickerId - 1;
             logMessage($"Stopping market depth: id={id}; {contractToString(mDOMTickers[marketDepthIndex].ContractDetails.Contract)}");
-            mApi.cancelMktDepth(id);
+            mApi.cancelMktDepth(id, false);
 
             mDOMTickers[marketDepthIndex] = null;
             mDepthMgr.Clear();
@@ -623,8 +623,7 @@ namespace ContractInspector
 
         internal delegate bool Validator(out string errMsg);
         private bool validate(Control c, Validator v) {
-            string errMsg = "";
-            if (!v(out errMsg)) {
+            if (!v(out string errMsg)) {
                 ErrorProvider.SetIconAlignment(c, ErrorIconAlignment.BottomLeft);
                 ErrorProvider.SetError(c, errMsg);
                 return false;
@@ -635,8 +634,7 @@ namespace ContractInspector
         }
 
         private bool validateClientId(out string errorMessage) {
-            int clientId;
-            if (!int.TryParse(ClientIdTextBox.Text, out clientId)) {
+            if (!int.TryParse(ClientIdTextBox.Text, out int clientId)) {
                 errorMessage = "ClientId must be a number";
                 return false;
             } else if (clientId < 0) {
@@ -649,8 +647,7 @@ namespace ContractInspector
         }
 
         private bool validateContractId(out string errorMessage) {
-            int conId;
-            if (!int.TryParse(ConIdText.Text, out conId)) {
+            if (!int.TryParse(ConIdText.Text, out int conId)) {
                 errorMessage = "Value must be an integer";
                 return false;
             } else if (conId < 0) {
@@ -663,8 +660,7 @@ namespace ContractInspector
         }
 
         private bool validatePort(out string errorMessage) {
-            int port;
-            if (!int.TryParse(PortTextBox.Text, out port)) {
+            if (!int.TryParse(PortTextBox.Text, out int port)) {
                 errorMessage = "Port must be a number";
                 return false;
             } else if (port < 1027) {

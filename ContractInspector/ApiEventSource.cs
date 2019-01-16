@@ -48,8 +48,8 @@ namespace ContractInspector
     /// 
     /// </remarks>
     public class ApiEventSource : DefaultEWrapper {
-        private MainForm mUI;
-        private SynchronizationContext mSyncContext;
+        private readonly MainForm mUI;
+        private readonly SynchronizationContext mSyncContext;
 
         internal ApiEventSource(MainForm UI, SynchronizationContext syncContext) {
             this.mUI = UI;
@@ -100,12 +100,12 @@ namespace ContractInspector
             mSyncContext.Post((t) => mUI.tickString(tickerId, field, value), null);
         }
 
-        public override void tickPrice(int tickerId, int tickType, double price, TickAttrib attribs) {
-            mSyncContext.Post((t) => mUI.tickPrice(tickerId, tickType, price, attribs), null);
+        public override void tickPrice(int tickerId, int field, double price, TickAttrib attribs) {
+            mSyncContext.Post((t) => mUI.tickPrice(tickerId, field, price, attribs), null);
         }
 
-        public override void tickSize(int tickerId, int tickType, int size) {
-            mSyncContext.Post((t) => mUI.tickSize(tickerId, tickType, size), null);
+        public override void tickSize(int tickerId, int field, int size) {
+            mSyncContext.Post((t) => mUI.tickSize(tickerId, field, size), null);
         }
 
         public override void tickSnapshotEnd(int tickerId) {
@@ -115,12 +115,12 @@ namespace ContractInspector
 
         public override void updateMktDepth(int tickerId, int position, int operation, int side, double price, int size)
         {
-            mSyncContext.Post((t) => mUI.updateMktDepth(tickerId, position, "", operation, side, price, size), null);
+            mSyncContext.Post((t) => mUI.updateMktDepth(tickerId, position, "", operation, side, price, size, false), null);
         }
 
-        public override void updateMktDepthL2(int tickerId, int position, string marketMaker, int operation, int side, double price, int size)
+        public override void updateMktDepthL2(int tickerId, int position, string marketMaker, int operation, int side, double price, int size, bool isSmartDepth)
         {
-            mSyncContext.Post((t) => mUI.updateMktDepth(tickerId, position, marketMaker, operation, side, price, size), null);
+            mSyncContext.Post((t) => mUI.updateMktDepth(tickerId, position, marketMaker, operation, side, price, size, isSmartDepth), null);
         }
 
     }
