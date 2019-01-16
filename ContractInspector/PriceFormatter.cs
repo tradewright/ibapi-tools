@@ -45,6 +45,8 @@ namespace ContractInspector
         public const double OneSixtyFourth = 0.015625;
         public const double OneHundredTwentyEighth = 0.0078125;
 
+        public delegate string PriceFormatFunction(double arg);
+
         private static List<TickSizePatternEntry> mPriceFormatStrings = new List<TickSizePatternEntry>();
 
         private const string ThirtySecondsSeparator = "'";
@@ -61,36 +63,81 @@ namespace ContractInspector
         private const string ExactSixtyFourthIndicator = "";
         private const string HalfSixtyFourthIndicator = "+";
 
-        public static string FormatPrice(double pPrice, string pSecType, double pTickSize) {
-            // see http://www.cmegroup.com/trading/interest-rates/files/TreasuryFuturesPriceRoundingConventions_Mar_24_Final.pdf
-            // for details of price presentation, especially sections (2) and (7)
-
-            if (pTickSize == OneThirtySecond) return FormatPriceAs32nds(pPrice);
-
-            if (pTickSize == OneSixtyFourth) {
-                if (pSecType == "FUT")
-                    return FormatPriceAs32ndsAndFractions(pPrice);
-                return FormatPriceAs64ths(pPrice);
+        public static PriceFormatFunction GetPriceFormatter(string secType, double tickSize, bool showTickFractionsAsDecimals=false) {
+            if (tickSize == OneThirtySecond) {
+                if (showTickFractionsAsDecimals)
+                    return FormatPriceAs32ndsAndDecimals;
+                else
+                    return FormatPriceAs32nds;
+            }
+            if (tickSize == OneSixtyFourth) {
+                if (secType == "FUT") {
+                    if (showTickFractionsAsDecimals)
+                        return FormatPriceAs32ndsAndDecimals;
+                    else
+                        return FormatPriceAs32ndsAndFractions;
+                }
+                if (showTickFractionsAsDecimals)
+                    return FormatPriceAs64thsAndDecimals;
+                else
+                    return FormatPriceAs64ths;
             }
 
-            if (pTickSize == OneHundredTwentyEighth) {
-                if (pSecType == "FUT")
-                    return FormatPriceAs64thsAndFractions(pPrice);
-                return FormatPriceAs64thsAndFractions(pPrice);
+            if (tickSize == OneHundredTwentyEighth) {
+                if (secType == "FUT") {
+                    if (showTickFractionsAsDecimals)
+                        return FormatPriceAs64thsAndDecimals;
+                    else
+                        return FormatPriceAs64thsAndFractions;
+                }
+                if (showTickFractionsAsDecimals) {
+                    return FormatPriceAs64thsAndDecimals;
+                } else {
+                    return FormatPriceAs64thsAndFractions;
+                }
             }
 
-            return FormatPriceAsDecimals(pPrice, pTickSize);
+            var formatString = getPriceFormatString(tickSize);
+            return (v) => String.Format(formatString, v);
         }
 
-        public static string FormatPriceAs32nds(double pPrice) {
-            var priceInt = Math.Floor(pPrice);
-            var numberOf32nds = (int)Math.Floor((pPrice - priceInt) * 32);
+        public static string FormatPrice(double price, string secType, double tickSize, bool showTickFractions) {
+            if (tickSize == OneThirtySecond) {
+                if (showTickFractions)
+                    return FormatPriceAs32ndsAndDecimals(price);
+                else
+                    return FormatPriceAs32nds(price);
+            }
+
+            if (tickSize == OneSixtyFourth) {
+                if (secType == "FUT")
+                    return FormatPriceAs32ndsAndFractions(price);
+                return FormatPriceAs64ths(price);
+            }
+
+            if (tickSize == OneHundredTwentyEighth) {
+                if (secType == "FUT")
+                    return FormatPriceAs64thsAndFractions(price);
+                return FormatPriceAs64thsAndFractions(price);
+            }
+
+            return FormatPriceAsDecimals(price, tickSize);
+        }
+
+        public static string FormatPriceAs32nds(double price) {
+            var priceInt = Math.Floor(price);
+            var fract = price - priceInt;
+            var numberOf32nds = (int)Math.Floor((price - priceInt) * 32);
             return $"{(int)priceInt:d}{ThirtySecondsSeparator}{numberOf32nds:00}";
         }
 
-        public static string FormatPriceAs32ndsAndFractions(double pPrice) {
-            var priceInt = Math.Floor(pPrice);
-            var numberOf128ths = (int)(Math.Floor((pPrice - priceInt) * 128));
+        public static string FormatPriceAs32ndsAndDecimals(double price) {
+            return formatPriceAsNthsAndDecimals(price, 32, ThirtySecondsSeparator);
+        }
+
+        public static string FormatPriceAs32ndsAndFractions(double price) {
+            var priceInt = Math.Floor(price);
+            var numberOf128ths = (int)(Math.Floor((price - priceInt) * 128));
             int rem;
             var numberOf32nds = Math.DivRem(numberOf128ths, 4, out rem);
             var remString = "";
@@ -112,15 +159,28 @@ namespace ContractInspector
             return $"{(int)priceInt:d}{ThirtySecondsAndFractionsSeparator}{(int)numberOf32nds:00}{remString}";
         }
 
-        public static string FormatPriceAs64ths(double pPrice) {
-            var priceInt = Math.Floor(pPrice);
-            var numberOf64ths = (int)Math.Floor((pPrice - priceInt) * 64);
+        public static string FormatPriceAs64ths(double price) {
+            var priceInt = Math.Floor(price);
+            var numberOf64ths = (int)Math.Floor((price - priceInt) * 64);
             return $"{(int)priceInt:d}{SixtyFourthsSeparator}{numberOf64ths:00}";
         }
 
-        public static string FormatPriceAs64thsAndFractions(double pPrice) {
-            var priceInt = Math.Floor(pPrice);
-            var numberOf128ths = (int)(Math.Floor((pPrice - priceInt) * 128));
+        public static string FormatPriceAs64thsAndDecimals(double price) {
+            return formatPriceAsNthsAndDecimals(price, 64, SixtyFourthsSeparator);
+            //var priceInt = Math.Floor(price);
+            //var fract = price - priceInt;
+            //var numberOf64ths = (int)Math.Floor(fract * 64);
+            //var f = (int)Math.Round(100.0 * ((fract - numberOf64ths * OneSixtyFourth) / OneSixtyFourth));
+            //if (f == 100) {
+            //    numberOf64ths += 1;
+            //    f = 0;
+            //}
+            //return $"{(int)priceInt:d}{SixtyFourthsSeparator}{numberOf64ths:00}.{f:00}";
+        }
+
+        public static string FormatPriceAs64thsAndFractions(double price) {
+            var priceInt = Math.Floor(price);
+            var numberOf128ths = (int)(Math.Floor((price - priceInt) * 128));
             int rem;
             var numberOf64ths = Math.DivRem(numberOf128ths, 2, out rem);
             var remString = "";
@@ -136,27 +196,39 @@ namespace ContractInspector
             return $"{(int)priceInt:d}{SixtyFourthsAndFractionsSeparator}{(int)numberOf64ths:00}{remString}";
         }
 
-        public static string FormatPriceAsDecimals(double pPrice, double pTickSize) {
-            return pPrice.ToString(getPriceFormatString(pTickSize));
+        public static string FormatPriceAsDecimals(double price, double tickSize) {
+            return price.ToString(getPriceFormatString(tickSize));
         }
 
-        private static string generatePriceFormatString(double pTickSize) {
-            var lNumberOfDecimals = pTickSize.ToString("0.##############").Length - 2;
+        private static string formatPriceAsNthsAndDecimals(double price, int N, string separator) {
+            var priceInt = Math.Floor(price);
+            var fract = price - priceInt;
+            var numberOfNths = Math.Floor(fract * N);
+            var f = (int)Math.Round(100.0 * N * (fract - numberOfNths / N));
+            if (f == 100) {
+                numberOfNths += 1;
+                f = 0;
+            }
+            return $"{(int)priceInt:d}{separator}{numberOfNths:00}.{f:00}";
+        }
+
+        private static string generatePriceFormatString(double tickSize) {
+            var lNumberOfDecimals = tickSize.ToString("0.##############").Length - 2;
 
             if (lNumberOfDecimals == 0)
                 return "0";
             else
-                return "0." + new String('0', lNumberOfDecimals);
+                return "{0:0." + new String('0', lNumberOfDecimals) + "}";
         }
 
-        private static string getPriceFormatString(double pTickSize) {
+        private static string getPriceFormatString(double tickSize) {
             for (var i = 0; i < mPriceFormatStrings.Count; i++) {
-                if (mPriceFormatStrings[i].TickSize == pTickSize)
+                if (mPriceFormatStrings[i].TickSize == tickSize)
                     return mPriceFormatStrings[i].Pattern;
             }
 
-            var pattern = generatePriceFormatString(pTickSize);
-            mPriceFormatStrings.Add(new TickSizePatternEntry() { TickSize = pTickSize, Pattern = pattern });
+            var pattern = generatePriceFormatString(tickSize);
+            mPriceFormatStrings.Add(new TickSizePatternEntry() { TickSize = tickSize, Pattern = pattern });
             return pattern;
         }
 
