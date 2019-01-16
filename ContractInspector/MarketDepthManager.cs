@@ -59,8 +59,8 @@ namespace ContractInspector
         private DataGridView mBidGrid;
         private DataGridView mAskGrid;
 
-        private string mSecType;
-        private double mTickSize;
+        private PriceFormatter.PriceFormatFunction mFormatPrice;
+        private PriceFormatter.PriceFormatFunction mFormatAvgPrice;
 
         internal bool InProgress { get; private set; }
         
@@ -85,13 +85,24 @@ namespace ContractInspector
             }
         }
 
-        internal void Initialise(int numberOfRows, string secType, double tickSize)
-        {
-            mSecType = secType;
-            mTickSize = tickSize;
+        internal void Initialise(int numberOfRows, string secType, double tickSize) {
             this.mAsks = new List<ModelEntry>(numberOfRows);
             this.mBids = new List<ModelEntry>(numberOfRows);
             InProgress = true;
+
+            mFormatPrice = PriceFormatter.GetPriceFormatter(secType, tickSize);
+
+            if (tickSize == PriceFormatter.OneEigth) {
+                mFormatAvgPrice = PriceFormatter.GetPriceFormatter(secType, 0.001);
+            } else if (tickSize == PriceFormatter.OneSixteenth) {
+                mFormatAvgPrice = PriceFormatter.GetPriceFormatter(secType, 0.0001);
+            } else if (tickSize == PriceFormatter.OneThirtySecond ||
+                tickSize == PriceFormatter.OneSixtyFourth ||
+                tickSize == PriceFormatter.OneHundredTwentyEighth) {
+                mFormatAvgPrice = PriceFormatter.GetPriceFormatter(secType, tickSize, true);
+            } else {
+                mFormatAvgPrice = PriceFormatter.GetPriceFormatter(secType, tickSize / 10.0);
+            }
         }
 
         internal void Clear()
@@ -151,11 +162,11 @@ namespace ContractInspector
                 if (i > checked(bookEntries.Rows.Count - 1))
                     bookEntries.Rows.Add();
                 var row = bookEntries.Rows[i];
-                row.Cells[(int)Cell.MarketMaker].Value = modelEntry.MarketMaker;
-                row.Cells[(int)Cell.Price].Value = PriceFormatter.FormatPrice(modelEntry.Price, mSecType, mTickSize);
-                row.Cells[(int)Cell.Size].Value = modelEntry.Size;
-                row.Cells[(int)Cell.CumSize].Value = cumSize;
-                row.Cells[(int)Cell.AvgPrice].Value = avgPrice;
+                bookEntries.Rows[i].SetValues(modelEntry.MarketMaker,
+                                            mFormatPrice(modelEntry.Price),
+                                            modelEntry.Size,
+                                            cumSize,
+                                            mFormatAvgPrice(avgPrice));
             }
         }
 

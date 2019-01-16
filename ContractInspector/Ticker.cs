@@ -33,8 +33,7 @@ namespace ContractInspector
     /// This class contains information relating to a single market data stream.
     /// 
     /// </summary>
-    internal class Ticker
-    {
+    internal class Ticker {
         /// <summary>
         /// The contract details For this ticker
         /// 
@@ -50,6 +49,8 @@ namespace ContractInspector
         internal DataGridViewRow GridRow { get; set; }
 
         internal bool IsSnapshot { get; set; }
+
+        internal PriceFormatter.PriceFormatFunction FormatPrice { get; set; }
 
         private Ticker() { }
 

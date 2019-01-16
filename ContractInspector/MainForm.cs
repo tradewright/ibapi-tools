@@ -116,7 +116,7 @@ namespace ContractInspector
         //Provides methods to invoke TWS functionality
         private EClientSocket mApi;
 
-        //maintaIns the market depth model, and updates the market depth displays
+        //maintains the market depth model, and updates the market depth displays
         private MarketDepthManager mDepthMgr;
 
         private ContractFetcher mContractFetcher;
@@ -256,9 +256,9 @@ namespace ContractInspector
         {
             if (mDepthMgr.InProgress)
                 stopMarketDepth();
-            var contractDetails = (ContractDetails)ContractGrid.SelectedRows[0].Tag;
-            mDepthMgr.Initialise(20, contractDetails.Contract.SecType,contractDetails.MinTick * contractDetails.PriceMagnifier);
-            startMarketDepth(contractDetails);
+            var cd = (ContractDetails)ContractGrid.SelectedRows[0].Tag;
+            mDepthMgr.Initialise(20, cd.Contract.SecType,cd.MinTick * cd.PriceMagnifier);
+            startMarketDepth(cd);
             StopMarketDepthButton.Enabled = true;
             TabControl1.SelectedTab = MarketDepthTabPage;
         }
@@ -379,17 +379,17 @@ namespace ContractInspector
 
         public void tickPrice(int tickerId, int tickType, double price, TickAttrib attribs)
         {
-            var cd = mTickers[tickerId].ContractDetails;
+            var formatPrice = mTickers[tickerId].FormatPrice;
             switch (tickType)
             {
             case IBApi.TickType.ASK:
-                showTickerValue(tickerId, TickerColumnAsk, PriceFormatter.FormatPrice(price, cd.Contract.SecType, cd.MinTick * cd.PriceMagnifier));
+                showTickerValue(tickerId, TickerColumnAsk, formatPrice(price));
                 break;
             case IBApi.TickType.BID:
-                showTickerValue(tickerId, TickerColumnBid, PriceFormatter.FormatPrice(price, cd.Contract.SecType, cd.MinTick * cd.PriceMagnifier));
+                showTickerValue(tickerId, TickerColumnBid, formatPrice(price));
                 break;
             case IBApi.TickType.LAST:
-                showTickerValue(tickerId, TickerColumnLast, PriceFormatter.FormatPrice(price, cd.Contract.SecType, cd.MinTick * cd.PriceMagnifier));
+                showTickerValue(tickerId, TickerColumnLast, formatPrice(price));
                 break;
             }
         }
@@ -478,6 +478,7 @@ namespace ContractInspector
             ContractGrid.Rows.Clear();
             mDepthMgr.Clear();
             stopAllTickers();
+            stopMarketDepth();
 
             mNextTickerId = 0;
             mTickers.Clear();
@@ -558,6 +559,7 @@ namespace ContractInspector
             mApi.reqMktData(id, contractDetails.Contract, "", snapshot, false, null);
             Ticker ticker = new Ticker(contractDetails) {
                 ContractDetails = contractDetails,
+                FormatPrice = PriceFormatter.GetPriceFormatter(contractDetails.Contract.SecType, contractDetails.MinTick * contractDetails.PriceMagnifier),
                 IsSnapshot = true
             };
             mTickers.Add(ticker);
