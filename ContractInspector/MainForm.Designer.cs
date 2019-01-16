@@ -37,10 +37,6 @@ namespace ContractInspector
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -52,6 +48,10 @@ namespace ContractInspector
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.LogText = new System.Windows.Forms.TextBox();
             this.ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -97,17 +97,6 @@ namespace ContractInspector
             this.ContractFetchStatusLabel = new System.Windows.Forms.Label();
             this.ContractsCountLabel = new System.Windows.Forms.Label();
             this.ContractGrid = new System.Windows.Forms.DataGridView();
-            this.ContractId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractLocalSymbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractSecType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractSymbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractTradingClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractExchange = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractExpiry = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractStrike = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractMultiplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TickersTabPage = new System.Windows.Forms.TabPage();
             this.StopTickersButton = new System.Windows.Forms.Button();
             this.TickerGrid = new System.Windows.Forms.DataGridView();
@@ -144,6 +133,18 @@ namespace ContractInspector
             this.ServerTextBox = new System.Windows.Forms.TextBox();
             this.Label13 = new System.Windows.Forms.Label();
             this.ConnectDisconnectButton = new System.Windows.Forms.Button();
+            this.ContractId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractLocalSymbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractSecType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractSymbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractTradingClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractExchange = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractPrimaryExchange = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractExpiry = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractStrike = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractMultiplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer2)).BeginInit();
             this.SplitContainer2.Panel1.SuspendLayout();
@@ -862,6 +863,7 @@ namespace ContractInspector
             this.ContractSymbol,
             this.ContractTradingClass,
             this.ContractExchange,
+            this.ContractPrimaryExchange,
             this.ContractCurrency,
             this.ContractExpiry,
             this.ContractStrike,
@@ -884,81 +886,6 @@ namespace ContractInspector
             this.ContractGrid.Size = new System.Drawing.Size(810, 407);
             this.ContractGrid.TabIndex = 12;
             this.ContractGrid.SelectionChanged += new System.EventHandler(this.ContractGrid_SelectionChanged);
-            // 
-            // ContractId
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.DimGray;
-            this.ContractId.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ContractId.HeaderText = "Contract Id";
-            this.ContractId.Name = "ContractId";
-            this.ContractId.ReadOnly = true;
-            // 
-            // ContractLocalSymbol
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.ContractLocalSymbol.DefaultCellStyle = dataGridViewCellStyle4;
-            this.ContractLocalSymbol.HeaderText = "Local Symbol";
-            this.ContractLocalSymbol.Name = "ContractLocalSymbol";
-            this.ContractLocalSymbol.ReadOnly = true;
-            // 
-            // ContractSecType
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.ContractSecType.DefaultCellStyle = dataGridViewCellStyle5;
-            this.ContractSecType.HeaderText = "Sec Type";
-            this.ContractSecType.Name = "ContractSecType";
-            this.ContractSecType.ReadOnly = true;
-            // 
-            // ContractSymbol
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.ContractSymbol.DefaultCellStyle = dataGridViewCellStyle6;
-            this.ContractSymbol.HeaderText = "Symbol";
-            this.ContractSymbol.Name = "ContractSymbol";
-            this.ContractSymbol.ReadOnly = true;
-            // 
-            // ContractTradingClass
-            // 
-            this.ContractTradingClass.HeaderText = "Trading Class";
-            this.ContractTradingClass.Name = "ContractTradingClass";
-            this.ContractTradingClass.ReadOnly = true;
-            // 
-            // ContractExchange
-            // 
-            this.ContractExchange.HeaderText = "Exchange";
-            this.ContractExchange.Name = "ContractExchange";
-            this.ContractExchange.ReadOnly = true;
-            // 
-            // ContractCurrency
-            // 
-            this.ContractCurrency.HeaderText = "Currency";
-            this.ContractCurrency.Name = "ContractCurrency";
-            this.ContractCurrency.ReadOnly = true;
-            // 
-            // ContractExpiry
-            // 
-            this.ContractExpiry.HeaderText = "Expiry";
-            this.ContractExpiry.Name = "ContractExpiry";
-            this.ContractExpiry.ReadOnly = true;
-            // 
-            // ContractStrike
-            // 
-            this.ContractStrike.HeaderText = "Strike";
-            this.ContractStrike.Name = "ContractStrike";
-            this.ContractStrike.ReadOnly = true;
-            // 
-            // ContractRight
-            // 
-            this.ContractRight.HeaderText = "Right";
-            this.ContractRight.Name = "ContractRight";
-            this.ContractRight.ReadOnly = true;
-            // 
-            // ContractMultiplier
-            // 
-            this.ContractMultiplier.HeaderText = "Multiplier";
-            this.ContractMultiplier.Name = "ContractMultiplier";
-            this.ContractMultiplier.ReadOnly = true;
             // 
             // TickersTabPage
             // 
@@ -1404,6 +1331,87 @@ namespace ContractInspector
             this.ConnectDisconnectButton.UseVisualStyleBackColor = true;
             this.ConnectDisconnectButton.Click += new System.EventHandler(this.ConnectDisconnectButton_Click);
             // 
+            // ContractId
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.DimGray;
+            this.ContractId.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ContractId.HeaderText = "Contract Id";
+            this.ContractId.Name = "ContractId";
+            this.ContractId.ReadOnly = true;
+            // 
+            // ContractLocalSymbol
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.ContractLocalSymbol.DefaultCellStyle = dataGridViewCellStyle4;
+            this.ContractLocalSymbol.HeaderText = "Local Symbol";
+            this.ContractLocalSymbol.Name = "ContractLocalSymbol";
+            this.ContractLocalSymbol.ReadOnly = true;
+            // 
+            // ContractSecType
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.ContractSecType.DefaultCellStyle = dataGridViewCellStyle5;
+            this.ContractSecType.HeaderText = "Sec Type";
+            this.ContractSecType.Name = "ContractSecType";
+            this.ContractSecType.ReadOnly = true;
+            // 
+            // ContractSymbol
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.ContractSymbol.DefaultCellStyle = dataGridViewCellStyle6;
+            this.ContractSymbol.HeaderText = "Symbol";
+            this.ContractSymbol.Name = "ContractSymbol";
+            this.ContractSymbol.ReadOnly = true;
+            // 
+            // ContractTradingClass
+            // 
+            this.ContractTradingClass.HeaderText = "Trading Class";
+            this.ContractTradingClass.Name = "ContractTradingClass";
+            this.ContractTradingClass.ReadOnly = true;
+            // 
+            // ContractExchange
+            // 
+            this.ContractExchange.HeaderText = "Exchange";
+            this.ContractExchange.Name = "ContractExchange";
+            this.ContractExchange.ReadOnly = true;
+            // 
+            // ContractPrimaryExchange
+            // 
+            this.ContractPrimaryExchange.HeaderText = "Primary Exchange";
+            this.ContractPrimaryExchange.Name = "ContractPrimaryExchange";
+            this.ContractPrimaryExchange.ReadOnly = true;
+            // 
+            // ContractCurrency
+            // 
+            this.ContractCurrency.HeaderText = "Currency";
+            this.ContractCurrency.Name = "ContractCurrency";
+            this.ContractCurrency.ReadOnly = true;
+            // 
+            // ContractExpiry
+            // 
+            this.ContractExpiry.HeaderText = "Expiry";
+            this.ContractExpiry.Name = "ContractExpiry";
+            this.ContractExpiry.ReadOnly = true;
+            // 
+            // ContractStrike
+            // 
+            this.ContractStrike.HeaderText = "Strike";
+            this.ContractStrike.Name = "ContractStrike";
+            this.ContractStrike.ReadOnly = true;
+            // 
+            // ContractRight
+            // 
+            this.ContractRight.HeaderText = "Right";
+            this.ContractRight.Name = "ContractRight";
+            this.ContractRight.ReadOnly = true;
+            // 
+            // ContractMultiplier
+            // 
+            this.ContractMultiplier.HeaderText = "Multiplier";
+            this.ContractMultiplier.Name = "ContractMultiplier";
+            this.ContractMultiplier.ReadOnly = true;
+            // 
             // MainForm
             // 
             this.AcceptButton = this.ConnectDisconnectButton;
@@ -1522,19 +1530,20 @@ namespace ContractInspector
         private DataGridViewTextBoxColumn DataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn DataGridViewTextBoxColumn4;
         private DataGridViewTextBoxColumn AveragePrice;
+        private Panel ContractSpecifierPanel;
+        private Button StartSnapshotsButton;
         private DataGridViewTextBoxColumn ContractId;
         private DataGridViewTextBoxColumn ContractLocalSymbol;
         private DataGridViewTextBoxColumn ContractSecType;
         private DataGridViewTextBoxColumn ContractSymbol;
         private DataGridViewTextBoxColumn ContractTradingClass;
         private DataGridViewTextBoxColumn ContractExchange;
+        private DataGridViewTextBoxColumn ContractPrimaryExchange;
         private DataGridViewTextBoxColumn ContractCurrency;
         private DataGridViewTextBoxColumn ContractExpiry;
         private DataGridViewTextBoxColumn ContractStrike;
         private DataGridViewTextBoxColumn ContractRight;
         private DataGridViewTextBoxColumn ContractMultiplier;
-        private Panel ContractSpecifierPanel;
-        private Button StartSnapshotsButton;
     }
 }
 

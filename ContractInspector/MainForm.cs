@@ -74,6 +74,7 @@ namespace ContractInspector
         private const string ContractColumnTradingClass = "ContractTradingClass";
         private const string ContractColumnExpiry = "ContractExpiry";
         private const string ContractColumnExchange = "ContractExchange";
+        private const string ContractColumnPrimaryExchange = "ContractPrimaryExchange";
         private const string ContractColumnCurrency = "ContractCurrency";
         private const string ContractColumnStrike = "ContractStrike";
         private const string ContractColumnRight = "ContractRight";
@@ -234,6 +235,7 @@ namespace ContractInspector
                     showContractValue(row, ContractColumnId, c.ConId.ToString());
                     showContractValue(row, ContractColumnCurrency, c.Currency);
                     showContractValue(row, ContractColumnExchange, c.Exchange);
+                    showContractValue(row, ContractColumnPrimaryExchange, c.PrimaryExch);
                     showContractValue(row, ContractColumnExpiry, c.LastTradeDateOrContractMonth);
                     showContractValue(row, ContractColumnLocalSymbol, c.LocalSymbol.Replace(" ", "\u00B7"));
                     showContractValue(row, ContractColumnMultiplier, c.Multiplier);
