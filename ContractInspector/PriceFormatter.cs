@@ -29,6 +29,8 @@ using System.Collections.Generic;
 
 namespace ContractInspector
 {
+#pragma warning disable RECS0018 // Comparison of floating point numbers with equality operator
+
     public static class PriceFormatter {
 
         struct TickSizePatternEntry {
@@ -167,15 +169,6 @@ namespace ContractInspector
 
         public static string FormatPriceAs64thsAndDecimals(double price) {
             return formatPriceAsNthsAndDecimals(price, 64, SixtyFourthsSeparator);
-            //var priceInt = Math.Floor(price);
-            //var fract = price - priceInt;
-            //var numberOf64ths = (int)Math.Floor(fract * 64);
-            //var f = (int)Math.Round(100.0 * ((fract - numberOf64ths * OneSixtyFourth) / OneSixtyFourth));
-            //if (f == 100) {
-            //    numberOf64ths += 1;
-            //    f = 0;
-            //}
-            //return $"{(int)priceInt:d}{SixtyFourthsSeparator}{numberOf64ths:00}.{f:00}";
         }
 
         public static string FormatPriceAs64thsAndFractions(double price) {
