@@ -92,20 +92,24 @@ namespace ContractInspector
             mSyncContext.Post((t) => mUI.managedAccounts(accountsList), null);
         }
 
+        public override void tickReqParams(int tickerId, double minTick, string bboExchange, int snapshotPermissions) {
+            mSyncContext.Post((t) => mUI.tickReqParams(tickerId, minTick, bboExchange, snapshotPermissions), null);
+        }
+
         public override void tickGeneric(int tickerId, int field, double value) {
-            mSyncContext.Post((t) => mUI.tickGeneric(tickerId, field, value), null);
+            mSyncContext.Post((t) => mUI.tickGeneric(tickerId, (TickType)field, value), null);
         }
 
         public override void tickString(int tickerId, int field, string value) {
-            mSyncContext.Post((t) => mUI.tickString(tickerId, field, value), null);
+            mSyncContext.Post((t) => mUI.tickString(tickerId, (TickType)field, value), null);
         }
 
         public override void tickPrice(int tickerId, int field, double price, TickAttrib attribs) {
-            mSyncContext.Post((t) => mUI.tickPrice(tickerId, field, price, attribs), null);
+            mSyncContext.Post((t) => mUI.tickPrice(tickerId, (TickType)field, price, attribs), null);
         }
 
         public override void tickSize(int tickerId, int field, int size) {
-            mSyncContext.Post((t) => mUI.tickSize(tickerId, field, size), null);
+            mSyncContext.Post((t) => mUI.tickSize(tickerId, (TickType)field, size), null);
         }
 
         public override void tickSnapshotEnd(int tickerId) {

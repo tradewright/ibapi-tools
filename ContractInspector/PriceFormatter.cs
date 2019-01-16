@@ -49,7 +49,7 @@ namespace ContractInspector
 
         public delegate string PriceFormatFunction(double arg);
 
-        private static List<TickSizePatternEntry> mPriceFormatStrings = new List<TickSizePatternEntry>();
+        private static readonly List<TickSizePatternEntry> mPriceFormatStrings = new List<TickSizePatternEntry>();
 
         private const string ThirtySecondsSeparator = "'";
         private const string ThirtySecondsAndFractionsSeparator = "'";
@@ -140,8 +140,7 @@ namespace ContractInspector
         public static string FormatPriceAs32ndsAndFractions(double price) {
             var priceInt = Math.Floor(price);
             var numberOf128ths = (int)(Math.Floor((price - priceInt) * 128));
-            int rem;
-            var numberOf32nds = Math.DivRem(numberOf128ths, 4, out rem);
+            var numberOf32nds = Math.DivRem(numberOf128ths, 4, out int rem);
             var remString = "";
             switch (rem) {
             case 0:
@@ -174,8 +173,7 @@ namespace ContractInspector
         public static string FormatPriceAs64thsAndFractions(double price) {
             var priceInt = Math.Floor(price);
             var numberOf128ths = (int)(Math.Floor((price - priceInt) * 128));
-            int rem;
-            var numberOf64ths = Math.DivRem(numberOf128ths, 2, out rem);
+            var numberOf64ths = Math.DivRem(numberOf128ths, 2, out int rem);
             var remString = "";
             switch (rem) {
             case 0:

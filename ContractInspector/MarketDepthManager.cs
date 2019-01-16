@@ -56,8 +56,8 @@ namespace ContractInspector
 
         private List<ModelEntry> mAsks;
         private List<ModelEntry> mBids;
-        private DataGridView mBidGrid;
-        private DataGridView mAskGrid;
+        private readonly DataGridView mBidGrid;
+        private readonly DataGridView mAskGrid;
 
         private PriceFormatter.PriceFormatFunction mFormatPrice;
         private PriceFormatter.PriceFormatFunction mFormatAvgPrice;
@@ -92,6 +92,7 @@ namespace ContractInspector
 
             mFormatPrice = PriceFormatter.GetPriceFormatter(secType, tickSize);
 
+#pragma warning disable RECS0018 // Comparison of floating point numbers with equality operator
             if (tickSize == PriceFormatter.OneEigth) {
                 mFormatAvgPrice = PriceFormatter.GetPriceFormatter(secType, 0.001);
             } else if (tickSize == PriceFormatter.OneSixteenth) {
@@ -103,6 +104,7 @@ namespace ContractInspector
             } else {
                 mFormatAvgPrice = PriceFormatter.GetPriceFormatter(secType, tickSize / 10.0);
             }
+#pragma warning restore RECS0018 // Comparison of floating point numbers with equality operator
         }
 
         internal void Clear()

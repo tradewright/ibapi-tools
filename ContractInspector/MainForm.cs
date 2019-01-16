@@ -35,21 +35,19 @@ using System.Windows.Forms;
 
 namespace ContractInspector
 {
-    public partial class MainForm : Form
-    {
+    public partial class MainForm : Form {
 
-#region enums
+        #region enums
 
-        internal enum ConnectionState
-        {
+        internal enum ConnectionState {
             Disconnected,
             Connecting,
             Connected
         }
 
-#endregion
+        #endregion
 
-#region Constants
+        #region Constants
 
         // Set this constant to the name of the computer where TWS is running. If it's running on this computer, leave it blank.
         private const string TWSHostName = "";
@@ -89,12 +87,13 @@ namespace ContractInspector
         private const string TickerColumnLast = "Last";
         private const string TickerColumnLastSize = "LastSize";
         private const string TickerColumnLow = "Low";
+        private const string TickerColumnOpen = "Open";
         private const string TickerColumnSymbol = "Symbol";
         private const string TickerColumnVolume = "Volume";
 
-    #endregion
+        #endregion
 
-#region Fields
+        #region Fields
 
         // Records whether there is currently a connection to the API server
         private ConnectionState mConnectionState = ConnectionState.Disconnected;
@@ -122,22 +121,23 @@ namespace ContractInspector
 
         private ContractFetcher mContractFetcher;
 
-#endregion
+        private static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0);
 
-#region Constructor
+        #endregion
 
-        public MainForm()
-        {
+        #region Constructor
+
+        public MainForm() {
             mApi = new EClientSocket((EWrapper)new ApiEventSource(this, SynchronizationContext.Current), mSignal);
             InitializeComponent();
         }
 
-#endregion
+        #endregion
 
-#region Form Event Handlers
+        #region Form Event Handlers
 
         protected override void OnClosing(CancelEventArgs e) {
-            if (mConnectionState!=ConnectionState.Disconnected) mApi.eDisconnect();
+            if (mConnectionState != ConnectionState.Disconnected) disconnectFromTWS();
             base.OnClosing(e);
         }
 
@@ -158,14 +158,13 @@ namespace ContractInspector
 
         #endregion
 
-#region Form Controls Event Handlers
+        #region Form Controls Event Handlers
 
         private void ClientIdTextBox_Validating(object sender, CancelEventArgs e) {
-            e.Cancel = !validate(ClientIdTextBox, validateClientId);
+            e.Cancel = !validate(this, ClientIdTextBox, validateClientId);
         }
 
-        private void ConnectDisconnectButton_Click(object sender, EventArgs e)
-        {
+        private void ConnectDisconnectButton_Click(object sender, EventArgs e) {
             if (mConnectionState == ConnectionState.Disconnected) {
                 connectToTWS();
             } else {
@@ -174,7 +173,7 @@ namespace ContractInspector
         }
 
         private void ConIdText_Validating(object sender, CancelEventArgs e) {
-            e.Cancel = !validate(ConIdText, validateContractId);
+            e.Cancel = !validate(this, ConIdText, validateContractId);
         }
 
         private void ContractGrid_SelectionChanged(object sender, EventArgs e) {
@@ -184,7 +183,7 @@ namespace ContractInspector
         }
 
         private void PortTextBox_Validating(object sender, CancelEventArgs e) {
-            e.Cancel = !validate(PortTextBox, validatePort);
+            e.Cancel = !validate(this, PortTextBox, validatePort);
         }
 
         private async void ReqContractDetailsButton_Click(object sender, EventArgs e) {
@@ -212,7 +211,7 @@ namespace ContractInspector
             mContractFetcher.ContractFetchProgress += (s, ev) => {
                 ContractFetchStatusLabel.Text = ev.Status;
                 var suff = ev.NumberOfContracts > 1 ? "s" : "";
-                ContractsCountLabel.Text=$"{ev.NumberOfContracts} contract{suff}";
+                ContractsCountLabel.Text = $"{ev.NumberOfContracts} contract{suff}";
                 ContractFetchProgressBar.Value = (int)ev.PercentComplete;
             };
             ContractFetchStatusLabel.Visible = true;
@@ -254,12 +253,11 @@ namespace ContractInspector
             this.UseWaitCursor = false;
         }
 
-        private void StartMarketDepthButton_Click(object sender, EventArgs e)
-        {
+        private void StartMarketDepthButton_Click(object sender, EventArgs e) {
             if (mDepthMgr.InProgress)
                 stopMarketDepth();
             var cd = (ContractDetails)ContractGrid.SelectedRows[0].Tag;
-            mDepthMgr.Initialise(20, cd.Contract.SecType,cd.MinTick * cd.PriceMagnifier);
+            mDepthMgr.Initialise(20, cd.Contract.SecType, cd.MinTick * cd.PriceMagnifier);
             startMarketDepth(cd);
             StopMarketDepthButton.Enabled = true;
             TabControl1.SelectedTab = MarketDepthTabPage;
@@ -269,8 +267,7 @@ namespace ContractInspector
             await startTickersAsync(true);
         }
 
-        private async void StartTickersButton_Click(object sender, EventArgs e)
-        {
+        private async void StartTickersButton_Click(object sender, EventArgs e) {
             await startTickersAsync(false);
         }
 
@@ -278,10 +275,8 @@ namespace ContractInspector
             stopMarketDepth();
         }
 
-        private void StopTickersButton_Click(object sender, EventArgs e)
-        {
-            foreach (DataGridViewRow row in TickerGrid.SelectedRows)
-            {
+        private void StopTickersButton_Click(object sender, EventArgs e) {
+            foreach (DataGridViewRow row in TickerGrid.SelectedRows) {
                 if (row.Tag != null)
                     stopTicker((int)row.Tag);
             }
@@ -289,15 +284,14 @@ namespace ContractInspector
         }
 
         private void StrikeText_Validating(object sender, CancelEventArgs e) {
-            e.Cancel = !validate(StrikeText, validateStrike);
+            e.Cancel = !validate(this, StrikeText, validateStrike);
         }
 
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e) {
             e.KeyChar = Char.ToUpper(e.KeyChar);
         }
 
-        private void TickerGrid_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
+        private void TickerGrid_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e) {
             StopTickersButton.Enabled = false;
         }
 
@@ -315,21 +309,20 @@ namespace ContractInspector
             StopTickersButton.Enabled = (TickerGrid.SelectedRows.Count > 0);
         }
 
-#endregion
+        #endregion
 
-#region TWS API Event Handlers
+        #region TWS API Event Handlers
 
-        internal void connectAck()
-        {
+        internal void connectAck() {
             setConnectionState(ConnectionState.Connected);
             logMessage("Connected ok");
             ConIdText.Focus();
             ReqContractDetailsButton.Enabled = true;
             this.AcceptButton = ReqContractDetailsButton;
+            mApi.reqCurrentTime();
         }
 
-        internal void connectionClosed()
-        {
+        internal void connectionClosed() {
             setConnectionState(ConnectionState.Disconnected);
             logMessage("Disconnected from TWS");
         }
@@ -342,89 +335,125 @@ namespace ContractInspector
             mContractFetcher.EndContractDetails();
         }
 
-        internal void currentTime(long time)
-        {
-            logMessage($"currentTime: {(object)time}");
+        internal void currentTime(long time) {
+            logMessage($"currentTime: {UnixTimestampToDate(time)}");
         }
 
-        internal void error(Exception e)
-        {
+        internal void error(Exception e) {
             logMessage($"An exception has occurred: {e.ToString()}");
             this.UseWaitCursor = false;
             if (mConnectionState == ConnectionState.Connecting)
                 setConnectionState(ConnectionState.Disconnected);
         }
 
-        internal void error(string str)
-        {
+        internal void error(string str) {
             logMessage($"Message from TWS: message={str}");
             this.UseWaitCursor = false;
         }
 
-        internal void error(int id, int errorCode, string errorMsg)
-        {
+        internal void error(int id, int errorCode, string errorMsg) {
             logMessage($"Message from TWS: code={errorCode}; id={id}; message={errorMsg}");
             if (mContractFetcher != null)
-                mContractFetcher.error(id, errorCode, errorMsg);
+                mContractFetcher.error(id);
             this.UseWaitCursor = false;
         }
 
-        internal void managedAccounts(string accountsList)
-        {
+        internal void managedAccounts(string accountsList) {
             logMessage("Managed accounts: " + accountsList);
         }
 
-        internal void tickGeneric(int tickerId, int field, double value)
-        {
-            logMessage(string.Format($"tickGeneric: id={tickerId}; field={field}; value={value}"));
+        internal void tickGeneric(int tickerId, TickType field, double value) {
+            if (mTickers[tickerId]?.ContractDetails == null)
+                // the market depth stream has been stopped but this
+                // update was already on its way
+                return;
+            logMessage($"tickGeneric: id={tickerId}; field={getField(field)}; value={value}");
         }
 
-        public void tickPrice(int tickerId, int tickType, double price, TickAttrib attribs)
-        {
+        public void tickPrice(int tickerId, TickType field, double price, TickAttrib attribs) {
+            if (mTickers[tickerId]?.ContractDetails == null)
+                // the market depth stream has been stopped but this
+                // update was already on its way
+                return;
             var formatPrice = mTickers[tickerId].FormatPrice;
-            switch (tickType)
-            {
-            case IBApi.TickType.ASK:
+            switch (field) {
+            case TickType.Ask:
                 showTickerValue(tickerId, TickerColumnAsk, formatPrice(price));
                 break;
-            case IBApi.TickType.BID:
+            case TickType.Bid:
                 showTickerValue(tickerId, TickerColumnBid, formatPrice(price));
                 break;
-            case IBApi.TickType.LAST:
+            case TickType.Last:
                 showTickerValue(tickerId, TickerColumnLast, formatPrice(price));
+                break;
+            case TickType.Open:
+                showTickerValue(tickerId, TickerColumnOpen, formatPrice(price));
+                break;
+            case TickType.High:
+                showTickerValue(tickerId, TickerColumnHigh, formatPrice(price));
+                break;
+            case TickType.Low:
+                showTickerValue(tickerId, TickerColumnLow, formatPrice(price));
+                break;
+            case TickType.Close:
+                showTickerValue(tickerId, TickerColumnClose, formatPrice(price));
+                break;
+            default:
+                logMessage($"tickPrice: id={tickerId}; field={getField(field)}; value={formatPrice(price)}");
                 break;
             }
         }
 
-        internal void tickSize(int tickerId, int tickType, int size)
-        {
-            switch (tickType)
-            {
-            case IBApi.TickType.ASK_SIZE:
+        internal void tickReqParams(int tickerId, double minTick, string bboExchange, int snapshotPermissions) {
+            logMessage($"tickReqParams: id={tickerId}; minTick={minTick}; bboExchange={bboExchange}; snapshotPermissions={snapshotPermissions}");
+        }
+
+        internal void tickSize(int tickerId, TickType field, int size) {
+            if (mTickers[tickerId]?.ContractDetails == null)
+                // the market depth stream has been stopped but this
+                // update was already on its way
+                return;
+            switch (field) {
+            case TickType.AskSize:
                 showTickerValue(tickerId, TickerColumnAskSize, size.ToString());
                 break;
-            case IBApi.TickType.BID_SIZE:
+            case TickType.BidSize:
                 showTickerValue(tickerId, TickerColumnBidSize, size.ToString());
                 break;
-            case IBApi.TickType.LAST_SIZE:
+            case TickType.LastSize:
                 showTickerValue(tickerId, TickerColumnLastSize, size.ToString());
                 break;
-            case IBApi.TickType.VOLUME:
+            case TickType.Volume:
                 showTickerValue(tickerId, TickerColumnVolume, size.ToString());
+                break;
+            default:
+                logMessage($"tickSize: id={tickerId}; field={getField(field)}; value={size}");
                 break;
             }
         }
 
         internal void tickSnapshotEnd(int tickerId) {
+            if (mTickers[tickerId]?.ContractDetails == null)
+                // the market depth stream has been stopped but this
+                // update was already on its way
+                return;
             logMessage($"tickSnapshotEnd: id={tickerId}");
         }
 
-        internal void tickString(int tickerId, int field, string value) {
-            logMessage(string.Format($"tickString: id={tickerId}; field={field}; value={value}"));
+        internal void tickString(int tickerId, TickType field, string value) {
+            if (mTickers[tickerId]?.ContractDetails == null)
+                // the market depth stream has been stopped but this
+                // update was already on its way
+                return;
+            switch (field) {
+            case TickType.LastTimestamp:
+                value = UnixTimestampToDate(long.Parse(value)).ToString("yyyy-MM-dd hh:mm:ss");
+                break;
+            }
+            logMessage($"tickString: id={tickerId}; field={getField(field)}; value={value}");
         }
 
-        internal void updateMktDepth(int tickerId, int position, string marketMaker, int operation, int side, double price, int size, bool isSmartDepth)
-        {
+        internal void updateMktDepth(int tickerId, int position, string marketMaker, int operation, int side, double price, int size, bool isSmartDepth) {
             if (mDOMTickers[tickerId - MinimumMarketDepthId]?.ContractDetails == null)
                 // the market depth stream has been stopped but this
                 // update was already on its way
@@ -432,12 +461,11 @@ namespace ContractInspector
             mDepthMgr.UpdateMktDepth(tickerId, position, marketMaker, (MarketDepthManager.OperationType)operation, (MarketDepthManager.Side)side, price, size);
         }
 
-#endregion
+        #endregion
 
-#region Helper Methods
+        #region Helper Methods
 
-        private void connectToTWS()
-        {
+        private void connectToTWS() {
             logMessage("Connecting to TWS");
             setConnectionState(ConnectionState.Connecting);
             // this ensures the state changes are visible: otherwise the synchronous connection mechanism
@@ -454,8 +482,7 @@ namespace ContractInspector
 
                 ereader.Start();
 
-                while (mApi.IsConnected())
-                {
+                while (mApi.IsConnected()) {
                     mSignal.waitForSignal();
                     ereader.processMsgs();
                 }
@@ -464,13 +491,11 @@ namespace ContractInspector
                 task.Start();
         }
 
-        private string contractToString(Contract contract)
-        {
-            return String.Format($"secType={contract.SecType}; localSymbol={contract.LocalSymbol.Replace(" ", "\u00B7")}; exchange={contract.Exchange}; currency={contract.Currency}");
+        private string contractToString(Contract contract) {
+            return $"secType={contract.SecType}; localSymbol={contract.LocalSymbol.Replace(" ", "\u00B7")}; exchange={contract.Exchange}; currency={contract.Currency}";
         }
 
-        private void disconnectFromTWS()
-        {
+        private void disconnectFromTWS() {
             logMessage("Disconnecting from TWS");
             setConnectionState(ConnectionState.Disconnected);
             mApi.eDisconnect();
@@ -486,8 +511,7 @@ namespace ContractInspector
             mTickers.Clear();
         }
 
-        private void ensureTickerGridRowExists(int tickerId)
-        {
+        private void ensureTickerGridRowExists(int tickerId) {
             if (mTickers[tickerId].GridRow != null)
                 return;
             var row = TickerGrid.Rows[TickerGrid.Rows.Add()];
@@ -496,10 +520,12 @@ namespace ContractInspector
             showTickerValue(tickerId, TickerColumnSymbol, mTickers[tickerId].ContractDetails.Contract.LocalSymbol.Replace(" ", "\u00B7"));
         }
 
+        private string getField(TickType field) => Enum.GetName(typeof(TickType), field);
+
         private void logMessage(string pMsg)
         {
             if (!LogText.IsDisposed)
-                LogText.AppendText($"{ DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff")}  {pMsg}\r\n");
+                LogText.AppendText($"{ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}  {pMsg}\r\n");
         }
 
         private void setConnectionState(ConnectionState state) {
@@ -597,6 +623,9 @@ namespace ContractInspector
         {
             StopMarketDepthButton.Enabled = false;
 
+            if (!mDepthMgr.InProgress)
+                return;
+
             var marketDepthIndex = mNextDOMTickerId - 1 - MinimumMarketDepthId;
 
             if (mDOMTickers[marketDepthIndex] == null)
@@ -623,8 +652,10 @@ namespace ContractInspector
             mTickers[tickerId] = null;
         }
 
+        public static DateTime UnixTimestampToDate(long seconds) => UnixEpoch.AddSeconds(Convert.ToDouble(seconds));
+
         internal delegate bool Validator(out string errMsg);
-        private bool validate(Control c, Validator v) {
+        private bool validate(MainForm instance, Control c, Validator v) {
             if (!v(out string errMsg)) {
                 ErrorProvider.SetIconAlignment(c, ErrorIconAlignment.BottomLeft);
                 ErrorProvider.SetError(c, errMsg);
@@ -675,8 +706,7 @@ namespace ContractInspector
         }
 
         private bool validateStrike(out string errorMessage) {
-            double strike;
-            if (!double.TryParse(StrikeText.Text, out strike)) {
+            if (!double.TryParse(StrikeText.Text, out double strike)) {
                 errorMessage = "Strike must be a number";
                 return false;
             } else if (strike < 0) {

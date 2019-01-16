@@ -37,6 +37,10 @@ namespace ContractInspector
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -48,10 +52,6 @@ namespace ContractInspector
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.LogText = new System.Windows.Forms.TextBox();
             this.ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -97,17 +97,21 @@ namespace ContractInspector
             this.ContractFetchStatusLabel = new System.Windows.Forms.Label();
             this.ContractsCountLabel = new System.Windows.Forms.Label();
             this.ContractGrid = new System.Windows.Forms.DataGridView();
+            this.ContractId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractLocalSymbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractSecType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractSymbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractTradingClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractExchange = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractPrimaryExchange = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractExpiry = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractStrike = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContractMultiplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TickersTabPage = new System.Windows.Forms.TabPage();
             this.StopTickersButton = new System.Windows.Forms.Button();
             this.TickerGrid = new System.Windows.Forms.DataGridView();
-            this.Symbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BidSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Bid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Last = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LastSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ask = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AskSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MarketDepthTabPage = new System.Windows.Forms.TabPage();
             this.StopMarketDepthButton = new System.Windows.Forms.Button();
             this.TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -133,18 +137,18 @@ namespace ContractInspector
             this.ServerTextBox = new System.Windows.Forms.TextBox();
             this.Label13 = new System.Windows.Forms.Label();
             this.ConnectDisconnectButton = new System.Windows.Forms.Button();
-            this.ContractId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractLocalSymbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractSecType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractSymbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractTradingClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractExchange = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractPrimaryExchange = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractExpiry = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractStrike = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractMultiplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Symbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BidSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Bid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Last = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ask = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AskSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.High = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Low = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Open = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Close = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer2)).BeginInit();
             this.SplitContainer2.Panel1.SuspendLayout();
@@ -181,7 +185,7 @@ namespace ContractInspector
             this.LogText.Name = "LogText";
             this.LogText.ReadOnly = true;
             this.LogText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.LogText.Size = new System.Drawing.Size(1035, 199);
+            this.LogText.Size = new System.Drawing.Size(1254, 280);
             this.LogText.TabIndex = 9;
             this.LogText.TabStop = false;
             // 
@@ -193,7 +197,7 @@ namespace ContractInspector
             // 
             this.StartMarketDepthButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.StartMarketDepthButton.Enabled = false;
-            this.StartMarketDepthButton.Location = new System.Drawing.Point(219, 410);
+            this.StartMarketDepthButton.Location = new System.Drawing.Point(219, 585);
             this.StartMarketDepthButton.Name = "StartMarketDepthButton";
             this.StartMarketDepthButton.Size = new System.Drawing.Size(100, 35);
             this.StartMarketDepthButton.TabIndex = 24;
@@ -206,7 +210,7 @@ namespace ContractInspector
             // 
             this.StartTickersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.StartTickersButton.Enabled = false;
-            this.StartTickersButton.Location = new System.Drawing.Point(6, 410);
+            this.StartTickersButton.Location = new System.Drawing.Point(6, 585);
             this.StartTickersButton.Name = "StartTickersButton";
             this.StartTickersButton.Size = new System.Drawing.Size(100, 35);
             this.StartTickersButton.TabIndex = 22;
@@ -219,7 +223,7 @@ namespace ContractInspector
             // 
             this.StartSnapshotsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.StartSnapshotsButton.Enabled = false;
-            this.StartSnapshotsButton.Location = new System.Drawing.Point(113, 410);
+            this.StartSnapshotsButton.Location = new System.Drawing.Point(113, 585);
             this.StartSnapshotsButton.Name = "StartSnapshotsButton";
             this.StartSnapshotsButton.Size = new System.Drawing.Size(100, 35);
             this.StartSnapshotsButton.TabIndex = 23;
@@ -246,7 +250,7 @@ namespace ContractInspector
             // 
             this.SplitContainer2.Panel2.BackColor = System.Drawing.Color.Azure;
             this.SplitContainer2.Panel2.Controls.Add(this.TabControl1);
-            this.SplitContainer2.Size = new System.Drawing.Size(1045, 473);
+            this.SplitContainer2.Size = new System.Drawing.Size(1264, 648);
             this.SplitContainer2.SplitterDistance = 230;
             this.SplitContainer2.TabIndex = 20;
             // 
@@ -254,7 +258,7 @@ namespace ContractInspector
             // 
             this.ReqContractDetailsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ReqContractDetailsButton.Enabled = false;
-            this.ReqContractDetailsButton.Location = new System.Drawing.Point(10, 431);
+            this.ReqContractDetailsButton.Location = new System.Drawing.Point(10, 606);
             this.ReqContractDetailsButton.Name = "ReqContractDetailsButton";
             this.ReqContractDetailsButton.Size = new System.Drawing.Size(95, 35);
             this.ReqContractDetailsButton.TabIndex = 78;
@@ -300,7 +304,7 @@ namespace ContractInspector
             this.ContractSpecifierPanel.Controls.Add(this.label21);
             this.ContractSpecifierPanel.Location = new System.Drawing.Point(0, 0);
             this.ContractSpecifierPanel.Name = "ContractSpecifierPanel";
-            this.ContractSpecifierPanel.Size = new System.Drawing.Size(228, 425);
+            this.ContractSpecifierPanel.Size = new System.Drawing.Size(228, 600);
             this.ContractSpecifierPanel.TabIndex = 107;
             // 
             // label20
@@ -780,7 +784,7 @@ namespace ContractInspector
             this.TabControl1.Location = new System.Drawing.Point(-2, 0);
             this.TabControl1.Name = "TabControl1";
             this.TabControl1.SelectedIndex = 0;
-            this.TabControl1.Size = new System.Drawing.Size(817, 475);
+            this.TabControl1.Size = new System.Drawing.Size(1036, 650);
             this.TabControl1.TabIndex = 14;
             // 
             // ContractsTabPage
@@ -796,7 +800,7 @@ namespace ContractInspector
             this.ContractsTabPage.Location = new System.Drawing.Point(4, 22);
             this.ContractsTabPage.Name = "ContractsTabPage";
             this.ContractsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.ContractsTabPage.Size = new System.Drawing.Size(809, 449);
+            this.ContractsTabPage.Size = new System.Drawing.Size(1028, 624);
             this.ContractsTabPage.TabIndex = 4;
             this.ContractsTabPage.Text = "Contracts";
             // 
@@ -805,16 +809,16 @@ namespace ContractInspector
             this.ContractFetchProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ContractFetchProgressBar.ForeColor = System.Drawing.Color.PowderBlue;
-            this.ContractFetchProgressBar.Location = new System.Drawing.Point(524, 420);
+            this.ContractFetchProgressBar.Location = new System.Drawing.Point(524, 595);
             this.ContractFetchProgressBar.Name = "ContractFetchProgressBar";
-            this.ContractFetchProgressBar.Size = new System.Drawing.Size(181, 22);
+            this.ContractFetchProgressBar.Size = new System.Drawing.Size(400, 22);
             this.ContractFetchProgressBar.TabIndex = 34;
             this.ContractFetchProgressBar.Visible = false;
             // 
             // ContractFetchStatusLabel
             // 
             this.ContractFetchStatusLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ContractFetchStatusLabel.Location = new System.Drawing.Point(425, 420);
+            this.ContractFetchStatusLabel.Location = new System.Drawing.Point(425, 595);
             this.ContractFetchStatusLabel.Name = "ContractFetchStatusLabel";
             this.ContractFetchStatusLabel.Size = new System.Drawing.Size(105, 22);
             this.ContractFetchStatusLabel.TabIndex = 33;
@@ -824,7 +828,7 @@ namespace ContractInspector
             // ContractsCountLabel
             // 
             this.ContractsCountLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ContractsCountLabel.Location = new System.Drawing.Point(697, 420);
+            this.ContractsCountLabel.Location = new System.Drawing.Point(916, 595);
             this.ContractsCountLabel.Name = "ContractsCountLabel";
             this.ContractsCountLabel.Size = new System.Drawing.Size(106, 22);
             this.ContractsCountLabel.TabIndex = 32;
@@ -883,9 +887,90 @@ namespace ContractInspector
             this.ContractGrid.ReadOnly = true;
             this.ContractGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.ContractGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ContractGrid.Size = new System.Drawing.Size(810, 407);
+            this.ContractGrid.Size = new System.Drawing.Size(1029, 582);
             this.ContractGrid.TabIndex = 12;
             this.ContractGrid.SelectionChanged += new System.EventHandler(this.ContractGrid_SelectionChanged);
+            // 
+            // ContractId
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.DimGray;
+            this.ContractId.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ContractId.HeaderText = "Contract Id";
+            this.ContractId.Name = "ContractId";
+            this.ContractId.ReadOnly = true;
+            // 
+            // ContractLocalSymbol
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.ContractLocalSymbol.DefaultCellStyle = dataGridViewCellStyle4;
+            this.ContractLocalSymbol.HeaderText = "Local Symbol";
+            this.ContractLocalSymbol.Name = "ContractLocalSymbol";
+            this.ContractLocalSymbol.ReadOnly = true;
+            // 
+            // ContractSecType
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.ContractSecType.DefaultCellStyle = dataGridViewCellStyle5;
+            this.ContractSecType.HeaderText = "Sec Type";
+            this.ContractSecType.Name = "ContractSecType";
+            this.ContractSecType.ReadOnly = true;
+            // 
+            // ContractSymbol
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.ContractSymbol.DefaultCellStyle = dataGridViewCellStyle6;
+            this.ContractSymbol.HeaderText = "Symbol";
+            this.ContractSymbol.Name = "ContractSymbol";
+            this.ContractSymbol.ReadOnly = true;
+            // 
+            // ContractTradingClass
+            // 
+            this.ContractTradingClass.HeaderText = "Trading Class";
+            this.ContractTradingClass.Name = "ContractTradingClass";
+            this.ContractTradingClass.ReadOnly = true;
+            // 
+            // ContractExchange
+            // 
+            this.ContractExchange.HeaderText = "Exchange";
+            this.ContractExchange.Name = "ContractExchange";
+            this.ContractExchange.ReadOnly = true;
+            // 
+            // ContractPrimaryExchange
+            // 
+            this.ContractPrimaryExchange.HeaderText = "Primary Exchange";
+            this.ContractPrimaryExchange.Name = "ContractPrimaryExchange";
+            this.ContractPrimaryExchange.ReadOnly = true;
+            // 
+            // ContractCurrency
+            // 
+            this.ContractCurrency.HeaderText = "Currency";
+            this.ContractCurrency.Name = "ContractCurrency";
+            this.ContractCurrency.ReadOnly = true;
+            // 
+            // ContractExpiry
+            // 
+            this.ContractExpiry.HeaderText = "Expiry";
+            this.ContractExpiry.Name = "ContractExpiry";
+            this.ContractExpiry.ReadOnly = true;
+            // 
+            // ContractStrike
+            // 
+            this.ContractStrike.HeaderText = "Strike";
+            this.ContractStrike.Name = "ContractStrike";
+            this.ContractStrike.ReadOnly = true;
+            // 
+            // ContractRight
+            // 
+            this.ContractRight.HeaderText = "Right";
+            this.ContractRight.Name = "ContractRight";
+            this.ContractRight.ReadOnly = true;
+            // 
+            // ContractMultiplier
+            // 
+            this.ContractMultiplier.HeaderText = "Multiplier";
+            this.ContractMultiplier.Name = "ContractMultiplier";
+            this.ContractMultiplier.ReadOnly = true;
             // 
             // TickersTabPage
             // 
@@ -895,7 +980,7 @@ namespace ContractInspector
             this.TickersTabPage.Location = new System.Drawing.Point(4, 22);
             this.TickersTabPage.Name = "TickersTabPage";
             this.TickersTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.TickersTabPage.Size = new System.Drawing.Size(809, 449);
+            this.TickersTabPage.Size = new System.Drawing.Size(1028, 624);
             this.TickersTabPage.TabIndex = 0;
             this.TickersTabPage.Text = "Tickers";
             // 
@@ -903,7 +988,7 @@ namespace ContractInspector
             // 
             this.StopTickersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.StopTickersButton.Enabled = false;
-            this.StopTickersButton.Location = new System.Drawing.Point(6, 410);
+            this.StopTickersButton.Location = new System.Drawing.Point(6, 585);
             this.StopTickersButton.Name = "StopTickersButton";
             this.StopTickersButton.Size = new System.Drawing.Size(100, 35);
             this.StopTickersButton.TabIndex = 21;
@@ -943,7 +1028,11 @@ namespace ContractInspector
             this.LastSize,
             this.Ask,
             this.AskSize,
-            this.Volume});
+            this.Volume,
+            this.High,
+            this.Low,
+            this.Open,
+            this.Close});
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -958,57 +1047,9 @@ namespace ContractInspector
             this.TickerGrid.ReadOnly = true;
             this.TickerGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.TickerGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.TickerGrid.Size = new System.Drawing.Size(809, 407);
+            this.TickerGrid.Size = new System.Drawing.Size(1028, 582);
             this.TickerGrid.TabIndex = 11;
             this.TickerGrid.SelectionChanged += new System.EventHandler(this.TickerGrid_SelectionChanged);
-            // 
-            // Symbol
-            // 
-            this.Symbol.HeaderText = "Symbol";
-            this.Symbol.Name = "Symbol";
-            this.Symbol.ReadOnly = true;
-            // 
-            // BidSize
-            // 
-            this.BidSize.HeaderText = "Bid Size";
-            this.BidSize.Name = "BidSize";
-            this.BidSize.ReadOnly = true;
-            // 
-            // Bid
-            // 
-            this.Bid.HeaderText = "Bid";
-            this.Bid.Name = "Bid";
-            this.Bid.ReadOnly = true;
-            // 
-            // Last
-            // 
-            this.Last.HeaderText = "Last";
-            this.Last.Name = "Last";
-            this.Last.ReadOnly = true;
-            // 
-            // LastSize
-            // 
-            this.LastSize.HeaderText = "Last Size";
-            this.LastSize.Name = "LastSize";
-            this.LastSize.ReadOnly = true;
-            // 
-            // Ask
-            // 
-            this.Ask.HeaderText = "Ask";
-            this.Ask.Name = "Ask";
-            this.Ask.ReadOnly = true;
-            // 
-            // AskSize
-            // 
-            this.AskSize.HeaderText = "Ask Size";
-            this.AskSize.Name = "AskSize";
-            this.AskSize.ReadOnly = true;
-            // 
-            // Volume
-            // 
-            this.Volume.HeaderText = "Volume";
-            this.Volume.Name = "Volume";
-            this.Volume.ReadOnly = true;
             // 
             // MarketDepthTabPage
             // 
@@ -1227,8 +1268,8 @@ namespace ContractInspector
             // 
             this.SplitContainer1.Panel2.BackColor = System.Drawing.Color.Azure;
             this.SplitContainer1.Panel2.Controls.Add(this.LogText);
-            this.SplitContainer1.Size = new System.Drawing.Size(1045, 689);
-            this.SplitContainer1.SplitterDistance = 473;
+            this.SplitContainer1.Size = new System.Drawing.Size(1264, 945);
+            this.SplitContainer1.SplitterDistance = 648;
             this.SplitContainer1.TabIndex = 21;
             // 
             // ConnectionPanel
@@ -1246,7 +1287,7 @@ namespace ContractInspector
             this.ConnectionPanel.Controls.Add(this.ConnectDisconnectButton);
             this.ConnectionPanel.Location = new System.Drawing.Point(0, 0);
             this.ConnectionPanel.Name = "ConnectionPanel";
-            this.ConnectionPanel.Size = new System.Drawing.Size(1045, 42);
+            this.ConnectionPanel.Size = new System.Drawing.Size(1264, 42);
             this.ConnectionPanel.TabIndex = 22;
             // 
             // ConnectionStatusLabel
@@ -1255,7 +1296,7 @@ namespace ContractInspector
             this.ConnectionStatusLabel.BackColor = System.Drawing.Color.Transparent;
             this.ConnectionStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConnectionStatusLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(146)))), ((int)(((byte)(18)))));
-            this.ConnectionStatusLabel.Location = new System.Drawing.Point(881, 5);
+            this.ConnectionStatusLabel.Location = new System.Drawing.Point(1100, 5);
             this.ConnectionStatusLabel.Name = "ConnectionStatusLabel";
             this.ConnectionStatusLabel.Size = new System.Drawing.Size(152, 33);
             this.ConnectionStatusLabel.TabIndex = 28;
@@ -1331,86 +1372,77 @@ namespace ContractInspector
             this.ConnectDisconnectButton.UseVisualStyleBackColor = true;
             this.ConnectDisconnectButton.Click += new System.EventHandler(this.ConnectDisconnectButton_Click);
             // 
-            // ContractId
+            // Symbol
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.DimGray;
-            this.ContractId.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ContractId.HeaderText = "Contract Id";
-            this.ContractId.Name = "ContractId";
-            this.ContractId.ReadOnly = true;
+            this.Symbol.HeaderText = "Symbol";
+            this.Symbol.Name = "Symbol";
+            this.Symbol.ReadOnly = true;
             // 
-            // ContractLocalSymbol
+            // BidSize
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.ContractLocalSymbol.DefaultCellStyle = dataGridViewCellStyle4;
-            this.ContractLocalSymbol.HeaderText = "Local Symbol";
-            this.ContractLocalSymbol.Name = "ContractLocalSymbol";
-            this.ContractLocalSymbol.ReadOnly = true;
+            this.BidSize.HeaderText = "Bid Size";
+            this.BidSize.Name = "BidSize";
+            this.BidSize.ReadOnly = true;
             // 
-            // ContractSecType
+            // Bid
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.ContractSecType.DefaultCellStyle = dataGridViewCellStyle5;
-            this.ContractSecType.HeaderText = "Sec Type";
-            this.ContractSecType.Name = "ContractSecType";
-            this.ContractSecType.ReadOnly = true;
+            this.Bid.HeaderText = "Bid";
+            this.Bid.Name = "Bid";
+            this.Bid.ReadOnly = true;
             // 
-            // ContractSymbol
+            // Last
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.ContractSymbol.DefaultCellStyle = dataGridViewCellStyle6;
-            this.ContractSymbol.HeaderText = "Symbol";
-            this.ContractSymbol.Name = "ContractSymbol";
-            this.ContractSymbol.ReadOnly = true;
+            this.Last.HeaderText = "Last";
+            this.Last.Name = "Last";
+            this.Last.ReadOnly = true;
             // 
-            // ContractTradingClass
+            // LastSize
             // 
-            this.ContractTradingClass.HeaderText = "Trading Class";
-            this.ContractTradingClass.Name = "ContractTradingClass";
-            this.ContractTradingClass.ReadOnly = true;
+            this.LastSize.HeaderText = "Last Size";
+            this.LastSize.Name = "LastSize";
+            this.LastSize.ReadOnly = true;
             // 
-            // ContractExchange
+            // Ask
             // 
-            this.ContractExchange.HeaderText = "Exchange";
-            this.ContractExchange.Name = "ContractExchange";
-            this.ContractExchange.ReadOnly = true;
+            this.Ask.HeaderText = "Ask";
+            this.Ask.Name = "Ask";
+            this.Ask.ReadOnly = true;
             // 
-            // ContractPrimaryExchange
+            // AskSize
             // 
-            this.ContractPrimaryExchange.HeaderText = "Primary Exchange";
-            this.ContractPrimaryExchange.Name = "ContractPrimaryExchange";
-            this.ContractPrimaryExchange.ReadOnly = true;
+            this.AskSize.HeaderText = "Ask Size";
+            this.AskSize.Name = "AskSize";
+            this.AskSize.ReadOnly = true;
             // 
-            // ContractCurrency
+            // Volume
             // 
-            this.ContractCurrency.HeaderText = "Currency";
-            this.ContractCurrency.Name = "ContractCurrency";
-            this.ContractCurrency.ReadOnly = true;
+            this.Volume.HeaderText = "Volume";
+            this.Volume.Name = "Volume";
+            this.Volume.ReadOnly = true;
             // 
-            // ContractExpiry
+            // High
             // 
-            this.ContractExpiry.HeaderText = "Expiry";
-            this.ContractExpiry.Name = "ContractExpiry";
-            this.ContractExpiry.ReadOnly = true;
+            this.High.HeaderText = "High";
+            this.High.Name = "High";
+            this.High.ReadOnly = true;
             // 
-            // ContractStrike
+            // Low
             // 
-            this.ContractStrike.HeaderText = "Strike";
-            this.ContractStrike.Name = "ContractStrike";
-            this.ContractStrike.ReadOnly = true;
+            this.Low.HeaderText = "Low";
+            this.Low.Name = "Low";
+            this.Low.ReadOnly = true;
             // 
-            // ContractRight
+            // Open
             // 
-            this.ContractRight.HeaderText = "Right";
-            this.ContractRight.Name = "ContractRight";
-            this.ContractRight.ReadOnly = true;
+            this.Open.HeaderText = "Open";
+            this.Open.Name = "Open";
+            this.Open.ReadOnly = true;
             // 
-            // ContractMultiplier
+            // Close
             // 
-            this.ContractMultiplier.HeaderText = "Multiplier";
-            this.ContractMultiplier.Name = "ContractMultiplier";
-            this.ContractMultiplier.ReadOnly = true;
+            this.Close.HeaderText = "Prev Close";
+            this.Close.Name = "Close";
+            this.Close.ReadOnly = true;
             // 
             // MainForm
             // 
@@ -1418,11 +1450,12 @@ namespace ContractInspector
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
-            this.ClientSize = new System.Drawing.Size(1045, 729);
+            this.ClientSize = new System.Drawing.Size(1264, 985);
             this.Controls.Add(this.ConnectionPanel);
             this.Controls.Add(this.SplitContainer1);
             this.ForeColor = System.Drawing.Color.DimGray;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "IBAPI Contract Inspector";
             ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
             this.SplitContainer2.Panel1.ResumeLayout(false);
@@ -1494,14 +1527,6 @@ namespace ContractInspector
         private TabPage TickersTabPage;
         private Button StopTickersButton;
         private DataGridView TickerGrid;
-        private DataGridViewTextBoxColumn Symbol;
-        private DataGridViewTextBoxColumn BidSize;
-        private DataGridViewTextBoxColumn Bid;
-        private DataGridViewTextBoxColumn Last;
-        private DataGridViewTextBoxColumn LastSize;
-        private DataGridViewTextBoxColumn Ask;
-        private DataGridViewTextBoxColumn AskSize;
-        private DataGridViewTextBoxColumn Volume;
         private TabPage MarketDepthTabPage;
         private Button StopMarketDepthButton;
         private TableLayoutPanel TableLayoutPanel1;
@@ -1544,6 +1569,18 @@ namespace ContractInspector
         private DataGridViewTextBoxColumn ContractStrike;
         private DataGridViewTextBoxColumn ContractRight;
         private DataGridViewTextBoxColumn ContractMultiplier;
+        private DataGridViewTextBoxColumn Symbol;
+        private DataGridViewTextBoxColumn BidSize;
+        private DataGridViewTextBoxColumn Bid;
+        private DataGridViewTextBoxColumn Last;
+        private DataGridViewTextBoxColumn LastSize;
+        private DataGridViewTextBoxColumn Ask;
+        private DataGridViewTextBoxColumn AskSize;
+        private DataGridViewTextBoxColumn Volume;
+        private DataGridViewTextBoxColumn High;
+        private DataGridViewTextBoxColumn Low;
+        private DataGridViewTextBoxColumn Open;
+        private DataGridViewTextBoxColumn Close;
     }
 }
 

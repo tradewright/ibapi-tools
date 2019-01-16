@@ -81,7 +81,7 @@ namespace ContractInspector
             tcs.SetResult(contractDetailsList);
         }
 
-        internal void error(int id, int errorCode, string errorMsg) {
+        internal void error(int id) {
             if (id == mRequestID) {
                 mEventArgs.Status = "Error";
                 mEventArgs.PercentComplete = 100f;
