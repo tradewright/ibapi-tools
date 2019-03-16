@@ -8,13 +8,13 @@ Using this tool you can:
 2. Enter a partial or complete contract specification.
 
 3. Initiate a reqContractDetails() API call using this contract specification.
-   Optionally you can request snapshot data rather than full market data.
-
+   
 4. Examine the returned contract details in a data grid.
 
 5. Select one or more contracts from the grid and initiate reqMktData() API 
    calls for each selected contract: the resulting data streams are displayed 
-   in another grid. Optionally, snapshot data can be requested.
+   in another grid. Optionally you can request snapshot data rather than full 
+   market data.
    
 6. Select a single contract from the contracts grid and initiate a reqMktDepth()
    API call. The market depth data is displayed in real-time in separate grids
