@@ -139,16 +139,16 @@ namespace ContractInspector
             this.ConnectDisconnectButton = new System.Windows.Forms.Button();
             this.Symbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BidSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Bid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Last = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BidPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LastSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ask = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AskPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AskSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.High = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Low = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HighPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LowPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Open = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Close = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClosePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer2)).BeginInit();
             this.SplitContainer2.Panel1.SuspendLayout();
@@ -1023,16 +1023,16 @@ namespace ContractInspector
             this.TickerGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Symbol,
             this.BidSize,
-            this.Bid,
-            this.Last,
+            this.BidPrice,
+            this.LastPrice,
             this.LastSize,
-            this.Ask,
+            this.AskPrice,
             this.AskSize,
             this.Volume,
-            this.High,
-            this.Low,
+            this.HighPrice,
+            this.LowPrice,
             this.Open,
-            this.Close});
+            this.ClosePrice});
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1386,15 +1386,15 @@ namespace ContractInspector
             // 
             // Bid
             // 
-            this.Bid.HeaderText = "Bid";
-            this.Bid.Name = "Bid";
-            this.Bid.ReadOnly = true;
+            this.BidPrice.HeaderText = "Bid";
+            this.BidPrice.Name = "Bid";
+            this.BidPrice.ReadOnly = true;
             // 
             // Last
             // 
-            this.Last.HeaderText = "Last";
-            this.Last.Name = "Last";
-            this.Last.ReadOnly = true;
+            this.LastPrice.HeaderText = "Last";
+            this.LastPrice.Name = "Last";
+            this.LastPrice.ReadOnly = true;
             // 
             // LastSize
             // 
@@ -1404,9 +1404,9 @@ namespace ContractInspector
             // 
             // Ask
             // 
-            this.Ask.HeaderText = "Ask";
-            this.Ask.Name = "Ask";
-            this.Ask.ReadOnly = true;
+            this.AskPrice.HeaderText = "Ask";
+            this.AskPrice.Name = "Ask";
+            this.AskPrice.ReadOnly = true;
             // 
             // AskSize
             // 
@@ -1422,15 +1422,15 @@ namespace ContractInspector
             // 
             // High
             // 
-            this.High.HeaderText = "High";
-            this.High.Name = "High";
-            this.High.ReadOnly = true;
+            this.HighPrice.HeaderText = "High";
+            this.HighPrice.Name = "High";
+            this.HighPrice.ReadOnly = true;
             // 
             // Low
             // 
-            this.Low.HeaderText = "Low";
-            this.Low.Name = "Low";
-            this.Low.ReadOnly = true;
+            this.LowPrice.HeaderText = "Low";
+            this.LowPrice.Name = "Low";
+            this.LowPrice.ReadOnly = true;
             // 
             // Open
             // 
@@ -1440,9 +1440,9 @@ namespace ContractInspector
             // 
             // Close
             // 
-            this.Close.HeaderText = "Prev Close";
-            this.Close.Name = "Close";
-            this.Close.ReadOnly = true;
+            this.ClosePrice.HeaderText = "Prev Close";
+            this.ClosePrice.Name = "Close";
+            this.ClosePrice.ReadOnly = true;
             // 
             // MainForm
             // 
@@ -1571,16 +1571,16 @@ namespace ContractInspector
         private DataGridViewTextBoxColumn ContractMultiplier;
         private DataGridViewTextBoxColumn Symbol;
         private DataGridViewTextBoxColumn BidSize;
-        private DataGridViewTextBoxColumn Bid;
-        private DataGridViewTextBoxColumn Last;
+        private DataGridViewTextBoxColumn BidPrice;
+        private DataGridViewTextBoxColumn LastPrice;
         private DataGridViewTextBoxColumn LastSize;
-        private DataGridViewTextBoxColumn Ask;
+        private DataGridViewTextBoxColumn AskPrice;
         private DataGridViewTextBoxColumn AskSize;
         private DataGridViewTextBoxColumn Volume;
-        private DataGridViewTextBoxColumn High;
-        private DataGridViewTextBoxColumn Low;
+        private DataGridViewTextBoxColumn HighPrice;
+        private DataGridViewTextBoxColumn LowPrice;
         private DataGridViewTextBoxColumn Open;
-        private DataGridViewTextBoxColumn Close;
+        private DataGridViewTextBoxColumn ClosePrice;
     }
 }
 
