@@ -497,18 +497,16 @@ namespace ContractInspector
 
         private void disconnectFromTWS() {
             logMessage("Disconnecting from TWS");
+
+            stopAllTickers();
+            stopMarketDepth();
+
             setConnectionState(ConnectionState.Disconnected);
             mApi.eDisconnect();
 
             ReqContractDetailsButton.Enabled = false;
 
             ContractGrid.Rows.Clear();
-            mDepthMgr.Clear();
-            stopAllTickers();
-            stopMarketDepth();
-
-            mNextTickerId = 0;
-            mTickers.Clear();
         }
 
         private void ensureTickerGridRowExists(int tickerId) {
@@ -617,6 +615,8 @@ namespace ContractInspector
                     stopTicker(i);
             }
             mNextTickerId = 0;
+            mTickers.Clear();
+            TickerGrid.Rows.Clear();
         }
 
         private void stopMarketDepth()
