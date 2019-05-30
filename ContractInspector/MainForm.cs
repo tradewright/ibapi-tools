@@ -202,7 +202,7 @@ namespace ContractInspector
                 SecId = SecIdText.Text,
                 SecIdType = SecIdTypeCombo.SelectedItem?.ToString(),
                 SecType = SecTypeCombo.SelectedItem?.ToString(),
-                Strike = int.Parse(StrikeText.Text),
+                Strike = double.Parse(StrikeText.Text),
                 Symbol = SymbolText.Text,
                 TradingClass = TradingClassText.Text
             };
