@@ -88,9 +88,9 @@ namespace ContractInspector
             if (tickSize == OneHundredTwentyEighth) {
                 if (secType == "FUT") {
                     if (showTickFractionsAsDecimals)
-                        return FormatPriceAs64thsAndDecimals;
+                        return FormatPriceAs32ndsAndDecimals;
                     else
-                        return FormatPriceAs64thsAndFractions;
+                        return FormatPriceAs32ndsAndFractions;
                 }
                 if (showTickFractionsAsDecimals) {
                     return FormatPriceAs64thsAndDecimals;
@@ -103,9 +103,9 @@ namespace ContractInspector
             return (v) => String.Format(formatString, v);
         }
 
-        public static string FormatPrice(double price, string secType, double tickSize, bool showTickFractions) {
+        public static string FormatPrice(double price, string secType, double tickSize, bool showTickFractionsAsDecimals=false) {
             if (tickSize == OneThirtySecond) {
-                if (showTickFractions)
+                if (showTickFractionsAsDecimals )
                     return FormatPriceAs32ndsAndDecimals(price);
                 else
                     return FormatPriceAs32nds(price);
@@ -113,14 +113,26 @@ namespace ContractInspector
 
             if (tickSize == OneSixtyFourth) {
                 if (secType == "FUT")
-                    return FormatPriceAs32ndsAndFractions(price);
-                return FormatPriceAs64ths(price);
+                    if (showTickFractionsAsDecimals)
+                        return FormatPriceAs32ndsAndDecimals(price);
+                    else
+                        return FormatPriceAs32ndsAndFractions(price);
+                if (showTickFractionsAsDecimals)
+                    return FormatPriceAs64thsAndDecimals(price);
+                else
+                    return FormatPriceAs64ths(price);
             }
 
             if (tickSize == OneHundredTwentyEighth) {
                 if (secType == "FUT")
+                    if (showTickFractionsAsDecimals)
+                        return FormatPriceAs32ndsAndDecimals(price);
+                    else
+                        return FormatPriceAs32ndsAndFractions(price);
+                if (showTickFractionsAsDecimals)
+                    return FormatPriceAs64thsAndDecimals(price);
+                else
                     return FormatPriceAs64thsAndFractions(price);
-                return FormatPriceAs64thsAndFractions(price);
             }
 
             return FormatPriceAsDecimals(price, tickSize);
@@ -128,7 +140,6 @@ namespace ContractInspector
 
         public static string FormatPriceAs32nds(double price) {
             var priceInt = Math.Floor(price);
-            var fract = price - priceInt;
             var numberOf32nds = (int)Math.Floor((price - priceInt) * 32);
             return $"{(int)priceInt:d}{ThirtySecondsSeparator}{numberOf32nds:00}";
         }
@@ -188,7 +199,7 @@ namespace ContractInspector
         }
 
         public static string FormatPriceAsDecimals(double price, double tickSize) {
-            return price.ToString(getPriceFormatString(tickSize));
+            return String.Format(getPriceFormatString(tickSize), price);
         }
 
         private static string formatPriceAsNthsAndDecimals(double price, int N, string separator) {
@@ -206,8 +217,8 @@ namespace ContractInspector
         private static string generatePriceFormatString(double tickSize) {
             var lNumberOfDecimals = tickSize.ToString("0.##############").Length - 2;
 
-            if (lNumberOfDecimals == 0)
-                return "0";
+            if (lNumberOfDecimals <= 0)
+                return "{0:0}";
             else
                 return "{0:0." + new String('0', lNumberOfDecimals) + "}";
         }

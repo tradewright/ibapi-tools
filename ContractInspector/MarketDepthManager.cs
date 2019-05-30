@@ -91,20 +91,8 @@ namespace ContractInspector
             InProgress = true;
 
             mFormatPrice = PriceFormatter.GetPriceFormatter(secType, tickSize);
+            mFormatAvgPrice = PriceFormatter.GetPriceFormatter(secType, tickSize, true);
 
-#pragma warning disable RECS0018 // Comparison of floating point numbers with equality operator
-            if (tickSize == PriceFormatter.OneEigth) {
-                mFormatAvgPrice = PriceFormatter.GetPriceFormatter(secType, 0.001);
-            } else if (tickSize == PriceFormatter.OneSixteenth) {
-                mFormatAvgPrice = PriceFormatter.GetPriceFormatter(secType, 0.0001);
-            } else if (tickSize == PriceFormatter.OneThirtySecond ||
-                tickSize == PriceFormatter.OneSixtyFourth ||
-                tickSize == PriceFormatter.OneHundredTwentyEighth) {
-                mFormatAvgPrice = PriceFormatter.GetPriceFormatter(secType, tickSize, true);
-            } else {
-                mFormatAvgPrice = PriceFormatter.GetPriceFormatter(secType, tickSize / 10.0);
-            }
-#pragma warning restore RECS0018 // Comparison of floating point numbers with equality operator
         }
 
         internal void Clear()
