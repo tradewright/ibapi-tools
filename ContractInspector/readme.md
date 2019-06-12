@@ -20,14 +20,8 @@ Using this tool you can:
    API call. The market depth data is displayed in real-time in separate grids
    for bids and asks.
 
-To install, download the relevant .zip file from the 
-[Releases](https://github.com/tradewright/ibapi-tools/releases)
-section. Right click on the .zip file and select `Properties`: if the `Unblock` 
-checkbox is visible, check it and click ok. Now extract the files to a folder 
-of your choice, eg C:\ContractInspector. 
+To install Contract Inspector, click [here](https://www.tradewright.com/contractinspector/ContractInspector.application)
 
 Alternatively clone the repository to your computer and build it using 
-Visual Studio 15 or Visual Studio 17 from the ContractInspector.sln solution 
-file in the ContractInspector folder.
-
-To run, start the ContractInspector.exe file.
+Visual Studio 15, 17 or 19 from the ContractInspector.sln solution 
+file in the ContractInspector folder. Then run the ContractInspector.exe file.
