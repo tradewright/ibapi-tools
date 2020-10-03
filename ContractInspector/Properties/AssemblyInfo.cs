@@ -56,8 +56,8 @@ using System.Reflection;
 [assembly: AssemblyTitle("ContractInspector")]
 [assembly: AssemblyDescription("ContractInspector for Interactive Brokers API")]
 [assembly: AssemblyProduct("ContractInspector")]
-[assembly: AssemblyCopyright("Copyright © Richard L King 2019")]
+[assembly: AssemblyCopyright("Copyright © Richard L King 2020")]
 
-[assembly: AssemblyVersion("1.3.1.0")]
+[assembly: AssemblyVersion("1.3.3.0")]
 [assembly: ComVisible(false)]
 

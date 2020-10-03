@@ -647,7 +647,7 @@ namespace ContractInspector
                 mApi.cancelMktData(tickerId);
 
             mTickers[tickerId].ContractDetails = null;
-            TickerGrid.Rows.Remove(mTickers[tickerId].GridRow);
+            if (mTickers[tickerId].GridRow != null) TickerGrid.Rows.Remove(mTickers[tickerId].GridRow);
             mTickers[tickerId].GridRow = null;
             mTickers[tickerId] = null;
         }
