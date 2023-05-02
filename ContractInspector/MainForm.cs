@@ -130,6 +130,7 @@ namespace ContractInspector
         public MainForm() {
             mApi = new EClientSocket((EWrapper)new ApiEventSource(this, SynchronizationContext.Current), mSignal);
             InitializeComponent();
+            this.Text = $"Contract Inspector v{Application.ProductVersion}";
         }
 
         #endregion
@@ -364,7 +365,7 @@ namespace ContractInspector
 
         internal void tickGeneric(int tickerId, TickType field, double value) {
             if (mTickers[tickerId]?.ContractDetails == null)
-                // the market depth stream has been stopped but this
+                // the market data stream has been stopped but this
                 // update was already on its way
                 return;
             logMessage($"tickGeneric: id={tickerId}; field={getField(field)}; value={value}");
@@ -372,9 +373,10 @@ namespace ContractInspector
 
         public void tickPrice(int tickerId, TickType field, double price, TickAttrib attribs) {
             if (mTickers[tickerId]?.ContractDetails == null)
-                // the market depth stream has been stopped but this
+                // the market data stream has been stopped but this
                 // update was already on its way
                 return;
+
             var formatPrice = mTickers[tickerId].FormatPrice;
             switch (field) {
             case TickType.Ask:
@@ -408,9 +410,9 @@ namespace ContractInspector
             logMessage($"tickReqParams: id={tickerId}; minTick={minTick}; bboExchange={bboExchange}; snapshotPermissions={snapshotPermissions}");
         }
 
-        internal void tickSize(int tickerId, TickType field, int size) {
+        internal void tickSize(int tickerId, TickType field, decimal size) {
             if (mTickers[tickerId]?.ContractDetails == null)
-                // the market depth stream has been stopped but this
+                // the market data stream has been stopped but this
                 // update was already on its way
                 return;
             switch (field) {
@@ -434,7 +436,7 @@ namespace ContractInspector
 
         internal void tickSnapshotEnd(int tickerId) {
             if (mTickers[tickerId]?.ContractDetails == null)
-                // the market depth stream has been stopped but this
+                // the market data stream has been stopped but this
                 // update was already on its way
                 return;
             logMessage($"tickSnapshotEnd: id={tickerId}");
@@ -442,7 +444,7 @@ namespace ContractInspector
 
         internal void tickString(int tickerId, TickType field, string value) {
             if (mTickers[tickerId]?.ContractDetails == null)
-                // the market depth stream has been stopped but this
+                // the market data stream has been stopped but this
                 // update was already on its way
                 return;
             switch (field) {
@@ -453,7 +455,7 @@ namespace ContractInspector
             logMessage($"tickString: id={tickerId}; field={getField(field)}; value={value}");
         }
 
-        internal void updateMktDepth(int tickerId, int position, string marketMaker, int operation, int side, double price, int size, bool isSmartDepth) {
+        internal void updateMktDepth(int tickerId, int position, string marketMaker, int operation, int side, double price, decimal size, bool isSmartDepth) {
             if (mDOMTickers[tickerId - MinimumMarketDepthId]?.ContractDetails == null)
                 // the market depth stream has been stopped but this
                 // update was already on its way
@@ -614,8 +616,6 @@ namespace ContractInspector
                 if (mTickers[i] != null)
                     stopTicker(i);
             }
-            mNextTickerId = 0;
-            mTickers.Clear();
             TickerGrid.Rows.Clear();
         }
 

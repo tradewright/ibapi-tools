@@ -58,6 +58,6 @@ using System.Reflection;
 [assembly: AssemblyProduct("ContractInspector")]
 [assembly: AssemblyCopyright("Copyright © Richard L King 2020")]
 
-[assembly: AssemblyVersion("1.3.3.0")]
+[assembly: AssemblyVersion("1.4.3.0")]
 [assembly: ComVisible(false)]
 

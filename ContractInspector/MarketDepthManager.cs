@@ -70,7 +70,7 @@ namespace ContractInspector
             this.mAskGrid = askGrid;
         }
 
-        internal void UpdateMktDepth(int tickerId, int rowId, string marketMaker, OperationType operation, Side side, double price, int size)
+        internal void UpdateMktDepth(int tickerId, int rowId, string marketMaker, OperationType operation, Side side, double price, decimal size)
         {
             switch (side)
             {
@@ -109,7 +109,7 @@ namespace ContractInspector
                                 OperationType operation, 
                                 Side side, 
                                 double price, 
-                                int size)
+                                decimal size)
         {
             switch (operation)
             {
@@ -132,7 +132,7 @@ namespace ContractInspector
         private void updateList(List<ModelEntry> model, DataGridView bookEntries, int baseRow)
         {
             double totalSize = 0.0;
-            int cumSize = 0;
+            decimal cumSize = 0;
             if (baseRow > 0)
             {
                 var modelEntry = model[checked(baseRow - 1)];
@@ -164,8 +164,8 @@ namespace ContractInspector
         {
             internal string MarketMaker;
             internal double Price;
-            internal int Size;
-            internal int CumSize;
+            internal decimal Size;
+            internal decimal CumSize;
             internal double TotalPrice;
         }
     }

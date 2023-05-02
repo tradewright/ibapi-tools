@@ -84,7 +84,8 @@ namespace ContractInspector
             mSyncContext.Post((t) => mUI.error(str), null);
         }
 
-        public override void error(int id, int errorCode, string errorMsg) {
+        public override void error(int id, int errorCode, string errorMsg, string advancedOrderRejectJson)
+        {
             mSyncContext.Post((t) => mUI.error(id, errorCode, errorMsg), null);
         }
 
@@ -108,7 +109,8 @@ namespace ContractInspector
             mSyncContext.Post((t) => mUI.tickPrice(tickerId, (TickType)field, price, attribs), null);
         }
 
-        public override void tickSize(int tickerId, int field, int size) {
+        public override void tickSize(int tickerId, int field, decimal size)
+        {
             mSyncContext.Post((t) => mUI.tickSize(tickerId, (TickType)field, size), null);
         }
 
@@ -116,13 +118,12 @@ namespace ContractInspector
             mSyncContext.Post((t) => mUI.tickSnapshotEnd(tickerId), null);
         }
 
-
-        public override void updateMktDepth(int tickerId, int position, int operation, int side, double price, int size)
+        public override void updateMktDepth(int tickerId, int position, int operation, int side, double price, decimal size)
         {
             mSyncContext.Post((t) => mUI.updateMktDepth(tickerId, position, "", operation, side, price, size, false), null);
         }
 
-        public override void updateMktDepthL2(int tickerId, int position, string marketMaker, int operation, int side, double price, int size, bool isSmartDepth)
+        public override void updateMktDepthL2(int tickerId, int position, string marketMaker, int operation, int side, double price, decimal size, bool isSmartDepth)
         {
             mSyncContext.Post((t) => mUI.updateMktDepth(tickerId, position, marketMaker, operation, side, price, size, isSmartDepth), null);
         }
