@@ -99,22 +99,22 @@ namespace ContractInspector
         private ConnectionState mConnectionState = ConnectionState.Disconnected;
 
         // For each ticker, this array stores information about it.
-        private List<Ticker> mTickers = new List<Ticker>();
+        private readonly List<Ticker> mTickers = new List<Ticker>();
 
         //This will be incremented for each ticker started. It is used as an index into mTickerGridRows
         private int mNextTickerId;
 
         // For each market depth stream, this array stores information about it.
-        private List<Ticker> mDOMTickers = new List<Ticker>();
+        private readonly List<Ticker> mDOMTickers = new List<Ticker>();
 
         // This will be incremented for each market depth started
         private int mNextDOMTickerId = MinimumMarketDepthId;
 
         //Used internally by the API
-        private EReaderSignal mSignal = new EReaderMonitorSignal();
+        private readonly EReaderSignal mSignal = new EReaderMonitorSignal();
 
         //Provides methods to invoke TWS functionality
-        private EClientSocket mApi;
+        private readonly EClientSocket mApi;
 
         //maintains the market depth model, and updates the market depth displays
         private MarketDepthManager mDepthMgr;
@@ -162,7 +162,7 @@ namespace ContractInspector
         #region Form Controls Event Handlers
 
         private void ClientIdTextBox_Validating(object sender, CancelEventArgs e) {
-            e.Cancel = !validate(this, ClientIdTextBox, validateClientId);
+            e.Cancel = !validate(ClientIdTextBox, validateClientId);
         }
 
         private void ConnectDisconnectButton_Click(object sender, EventArgs e) {
@@ -174,7 +174,7 @@ namespace ContractInspector
         }
 
         private void ConIdText_Validating(object sender, CancelEventArgs e) {
-            e.Cancel = !validate(this, ConIdText, validateContractId);
+            e.Cancel = !validate( ConIdText, validateContractId);
         }
 
         private void ContractGrid_SelectionChanged(object sender, EventArgs e) {
@@ -184,28 +184,28 @@ namespace ContractInspector
         }
 
         private void PortTextBox_Validating(object sender, CancelEventArgs e) {
-            e.Cancel = !validate(this, PortTextBox, validatePort);
+            e.Cancel = !validate( PortTextBox, validatePort);
         }
 
         private async void ReqContractDetailsButton_Click(object sender, EventArgs e) {
             ContractGrid.Rows.Clear();
 
             var contract = new Contract() {
-                ConId = int.Parse(ConIdText.Text),
-                Currency = CurrencyText.Text,
-                Exchange = ExchangeText.Text,
-                IncludeExpired = int.Parse(IncludeExpiredText.Text) != 0,
-                LastTradeDateOrContractMonth = LastTradeDateOrContractMonthText.Text,
-                LocalSymbol = LocalSymbolText.Text,
-                Multiplier = MultiplierText.Text,
-                PrimaryExch = PrimaryExchangeText.Text,
-                Right = RightText.Text,
-                SecId = SecIdText.Text,
-                SecIdType = SecIdTypeCombo.SelectedItem?.ToString(),
-                SecType = SecTypeCombo.SelectedItem?.ToString(),
-                Strike = double.Parse(StrikeText.Text),
-                Symbol = SymbolText.Text,
-                TradingClass = TradingClassText.Text
+                ConId = int.Parse(ConIdText.Text?.Trim()),
+                Currency = CurrencyText.Text?.Trim(),
+                Exchange = ExchangeText.Text?.Trim(),
+                IncludeExpired = int.Parse(IncludeExpiredText.Text?.Trim()) != 0,
+                LastTradeDateOrContractMonth = LastTradeDateOrContractMonthText.Text?.Trim(),
+                LocalSymbol = LocalSymbolText.Text?.Trim(),
+                Multiplier = MultiplierText.Text?.Trim(),
+                PrimaryExch = PrimaryExchangeText.Text?.Trim(),
+                Right = RightText.Text?.Trim(),
+                SecId = SecIdText.Text?.Trim(),
+                SecIdType = SecIdTypeCombo.SelectedItem?.ToString()?.Trim(),
+                SecType = SecTypeCombo.SelectedItem?.ToString()?.Trim(),
+                Strike = double.Parse(StrikeText.Text?.Trim()),
+                Symbol = SymbolText.Text?.Trim(),
+                TradingClass = TradingClassText.Text?.Trim()
             };
 
             mContractFetcher = new ContractFetcher();
@@ -237,7 +237,7 @@ namespace ContractInspector
                     showContractValue(row, ContractColumnExchange, c.Exchange);
                     showContractValue(row, ContractColumnPrimaryExchange, c.PrimaryExch);
                     showContractValue(row, ContractColumnExpiry, c.LastTradeDateOrContractMonth);
-                    showContractValue(row, ContractColumnLocalSymbol, c.LocalSymbol.Replace(" ", "\u00B7"));
+                    showContractValue(row, ContractColumnLocalSymbol, c.LocalSymbol?.Replace(" ", "\u00B7"));
                     showContractValue(row, ContractColumnMultiplier, c.Multiplier);
                     showContractValue(row, ContractColumnRight, c.Right);
                     showContractValue(row, ContractColumnType, c.SecType);
@@ -285,7 +285,7 @@ namespace ContractInspector
         }
 
         private void StrikeText_Validating(object sender, CancelEventArgs e) {
-            e.Cancel = !validate(this, StrikeText, validateStrike);
+            e.Cancel = !validate( StrikeText, validateStrike);
         }
 
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e) {
@@ -341,7 +341,7 @@ namespace ContractInspector
         }
 
         internal void error(Exception e) {
-            logMessage($"An exception has occurred: {e.ToString()}");
+            logMessage($"An exception has occurred: {e}");
             this.UseWaitCursor = false;
             if (mConnectionState == ConnectionState.Connecting)
                 setConnectionState(ConnectionState.Disconnected);
@@ -494,7 +494,7 @@ namespace ContractInspector
         }
 
         private string contractToString(Contract contract) {
-            return $"secType={contract.SecType}; localSymbol={contract.LocalSymbol.Replace(" ", "\u00B7")}; exchange={contract.Exchange}; currency={contract.Currency}";
+            return $"secType={contract.SecType}; localSymbol={contract.LocalSymbol?.Replace(" ", "\u00B7")}; exchange={contract.Exchange}; currency={contract.Currency}";
         }
 
         private void disconnectFromTWS() {
@@ -517,7 +517,7 @@ namespace ContractInspector
             var row = TickerGrid.Rows[TickerGrid.Rows.Add()];
             row.Tag = (object)tickerId;
             mTickers[tickerId].GridRow = row;
-            showTickerValue(tickerId, TickerColumnSymbol, mTickers[tickerId].ContractDetails.Contract.LocalSymbol.Replace(" ", "\u00B7"));
+            showTickerValue(tickerId, TickerColumnSymbol, mTickers[tickerId].ContractDetails.Contract.LocalSymbol?.Replace(" ", "\u00B7"));
         }
 
         private string getField(TickType field) => Enum.GetName(typeof(TickType), field);
@@ -525,7 +525,7 @@ namespace ContractInspector
         private void logMessage(string pMsg)
         {
             if (!LogText.IsDisposed)
-                LogText.AppendText($"{ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}  {pMsg}\r\n");
+                LogText.AppendText($"{ DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}  {pMsg}\r\n");
         }
 
         private void setConnectionState(ConnectionState state) {
@@ -655,7 +655,7 @@ namespace ContractInspector
         public static DateTime UnixTimestampToDate(long seconds) => UnixEpoch.AddSeconds(Convert.ToDouble(seconds));
 
         internal delegate bool Validator(out string errMsg);
-        private bool validate(MainForm instance, Control c, Validator v) {
+        private bool validate(Control c, Validator v) {
             if (!v(out string errMsg)) {
                 ErrorProvider.SetIconAlignment(c, ErrorIconAlignment.BottomLeft);
                 ErrorProvider.SetError(c, errMsg);

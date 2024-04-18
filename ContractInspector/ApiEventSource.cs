@@ -56,6 +56,11 @@ namespace ContractInspector
             this.mSyncContext = syncContext;
         }
 
+        public override void bondContractDetails(int reqId, ContractDetails contractDetails)
+        {
+            mSyncContext.Post((t) => mUI.contractDetails(reqId, contractDetails), null);
+        }
+
         public override void connectAck() {
             mSyncContext.Post((t) => mUI.connectAck(), null);
         }
